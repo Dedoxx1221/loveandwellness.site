@@ -1,0 +1,792 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Presentation</title>
+    
+    <script type="text/javascript" src="js/track.js"></script>
+    
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Exclusive Presentation">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Exclusive Presentation">
+    <meta property="og:description" content="Exclusive Presentation">
+    <meta property="og:image" content="images/ogimage.png">
+    
+<script>
+// Função para obter parâmetros da URL
+function getURLParameter(name) {
+ return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+
+// Função para remover um parâmetro específico da URL
+function removeURLParameter(url, parameter) {
+ var urlparts = url.split('?');
+ if (urlparts.length >= 2) {
+  var prefix = encodeURIComponent(parameter) + '=';
+  var pars = urlparts[1].split(/[&;]/g);
+  for (var i = pars.length; i-- > 0;) {
+   if (pars[i].lastIndexOf(prefix, 0) !== -1) {
+    pars.splice(i, 1);
+   }
+  }
+  return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+ }
+ return url;
+}
+
+// Verifica se o usuário já foi redirecionado anteriormente
+if (localStorage.getItem('userRedirected') === 'true') {
+ // Redireciona o usuário para outra página (por exemplo, página inicial)
+ window.location.href = "https://instagram.com";
+} else if (localStorage.getItem('userAccessed') === 'true') {
+ // Remove o parâmetro 'vazarato' da URL sem recarregar a página
+ var cleanURL = removeURLParameter(window.location.href, 'vazarato');
+ history.replaceState(null, null, cleanURL);
+} else {
+ // Verifica se a página foi acessada com o parâmetro correto
+ if (getURLParameter('vazarato') !== 'true') {
+  // Armazena no localStorage que o usuário foi redirecionado
+  localStorage.setItem('userRedirected', 'true');
+  // Redireciona o usuário para outra página (por exemplo, página inicial)
+  window.location.href = "https://instagram.com";
+ } else {
+  // Armazena no localStorage que o usuário acessou a página corretamente
+  localStorage.setItem('userAccessed', 'true');
+  // Remove o parâmetro 'vazarato' da URL sem recarregar a página
+  var cleanURL = removeURLParameter(window.location.href, 'vazarato');
+  history.replaceState(null, null, cleanURL);
+ }
+}
+</script>
+
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/45521673-96f5-49cf-b157-586379ebfee7/players/6a150410ed6ff67b2492b69b/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/45521673-96f5-49cf-b157-586379ebfee7/6a1503df323b27e7029c846b/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://license.vturb.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        *, ::after, ::before { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', sans-serif; background: #000; min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; user-select: none; -moz-user-select: none; -webkit-user-select: none; }
+        a { color: inherit; text-decoration: inherit; }
+
+        /* Animação do Dedo Apontando (6 Garrafas) */
+        @keyframes tsPoint {
+            0%, 100% { transform: translateY(-50%) translate(0,0) rotate(40deg); }
+            50% { transform: translateY(-50%) translate(12px,8px) rotate(60deg); }
+        }
+        .btn-6flaschen { position: relative !important; overflow: visible !important; }
+        .btn-6flaschen::after {
+            content: "👈🏻"; position: absolute; right: -5px; top: 95%; font-size: 48px; line-height: 1; pointer-events: none; z-index: 9999;
+            filter: drop-shadow(0 3px 2px rgba(0,0,0,.35)) drop-shadow(0 6px 6px rgba(0,0,0,.25));
+            animation: tsPoint 1.8s ease-in-out infinite; transform: translateY(-50%) translate(0,0) rotate(40deg);
+        }
+        @media(max-width:768px){ .btn-6flaschen::after { font-size: 34px; right: -15px; } }
+
+        /* Barra de Alerta do Topo */
+        .top-bar { background: #c61111; padding: 15px; text-align: center; color: #fff; font-weight: 600; font-size: 16px; }
+
+        /* Seção da VSL */
+        .vsl-container { background: #000; padding: 30px 0; width: 100%; }
+
+        /* Seção do Cronômetro de Urgência */
+        .urgency-section { background: #414141; padding: 20px 10px; text-align: center; }
+        .urgency-section h2 { font-family: 'Poppins', sans-serif; color: #ffeb00; font-size: 24px; font-weight: 500; line-height: 1.4; }
+        .urgency-section h1 { color: #fff; font-size: 48px; font-weight: 700; margin-top: 10px; }
+        @media screen and (max-width: 480px) { .urgency-section h2 { font-size: 16px; } .urgency-section h1 { font-size: 36px; } }
+
+        /* Container Geral para Preços e Garantia (fundo cinza) */
+        .gray-section { background: #ebebeb; padding-bottom: 50px; width: 100%; }
+        
+        .section-arrow { text-align: center; color: #414141; font-size: 61px; margin-top: -30px; margin-bottom: -10px; }
+        .section-arrow svg { height: 61px; width: 61px; fill: currentColor; }
+
+        /* Estilos Internos Exatos da Tabela de Preço */
+        .pricing-wrapper { width: 100%; display: flex; justify-content: center; background-color: transparent; padding: 20px 10px; }
+        .pricing-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; }
+        .card { border-radius: 18px; position: relative; background: #fff; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: transform .3s cubic-bezier(.25, .8, .25, 1), box-shadow .3s ease; z-index: 1; margin: 0; }
+        .card:hover { transform: scale(1.02); z-index: 10; box-shadow: 0 8px 16px rgba(0,0,0,.12); }
+        .highlight-header { background-color: #ee484e; color: #fff; padding: 8px; font-size: 16px; font-weight: 700; text-transform: uppercase; text-align: center; width: 100%; border-radius: 18px 18px 0 0; position: relative; z-index: 2; }
+        .gray-header { display: none; background-color: #a6a6a6; color: #fff; padding: 10px; font-size: 18px; font-weight: 700; text-transform: uppercase; text-align: center; border-radius: 15px 15px 0 0; }
+        .highlight-body { background: linear-gradient(180deg,#fae7b8 0,#fef6e0 100%); border: 3px solid #000; border-top: none; border-radius: 0 0 18px 18px; padding-top: 5px; }
+        .card.standard { border: 3px solid #a6a6a6; background: #fff; border-radius: 18px; }
+        .card-row { display: flex; flex-direction: row; padding: 12px; gap: 8px; align-items: center; }
+        .col-left { width: 45%; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .col-right { width: 55%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        
+        .card h3 { font-size: 19px; font-weight: 800; color: #000; margin-bottom: -2px; text-transform: uppercase; line-height: 1.1; }
+        .subtitle { font-size: 13px; font-weight: 400; color: #000; margin-bottom: 2px; }
+        .product-img { max-width: 100%; width: 110px; height: auto; object-fit: contain; margin: 15px 0; }
+        .product-img.product-img-lg { width: 150px; }
+        .total-price-row { font-size: 18px; margin-top: 2px; font-weight: 800; color: #000; display: flex; align-items: center; justify-content: center; }
+        .strike-red { text-decoration: line-through; text-decoration-color: #ee484e; -webkit-text-decoration-color: #ee484e; text-decoration-thickness: 2px; color: #999; margin-right: 5px; font-weight: 600; }
+        .unit-price-row { margin-bottom: 5px; display: flex; align-items: flex-start; justify-content: center; line-height: 1; color: #2b2b2b; }
+        .currency-symbol { font-size: 20px; font-weight: 700; margin-top: 6px; margin-right: 1px; }
+        .big-number { font-size: 52px; font-weight: 800; letter-spacing: -2px; color: #2b2b2b; line-height: 1; }
+        .per-unit { font-size: 10px; font-weight: 600; align-self: flex-end; margin-bottom: 8px; margin-left: 2px; text-transform: uppercase; color: #333; }
+        
+        .badges-container { width: 80%; display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; margin-left: auto; margin-right: auto; }
+        .badge { color: #fff; font-size: 10px; padding: 4px 2px; border-radius: 5px; font-weight: 700; width: 100%; display: flex; align-items: center; justify-content: center; gap: 5px; box-shadow: 0 1px 2px rgba(0,0,0,.1); line-height: 1; }
+        .badge svg { width: 10px; height: 10px; fill: white; }
+        .bg-red { background-color: #ee484e; }
+        .bg-black { background-color: #000; }
+        .bg-green { background-color: #4a8b6c; }
+        
+        .btn-visual { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 8px 0; border-radius: 6px; font-size: 16px; font-weight: 800; text-decoration: none; color: #000; transition: transform .1s; margin-bottom: 2px; }
+        .btn-visual svg { width: 16px; height: 16px; }
+        .btn-gold-3d { background: linear-gradient(180deg,#fddb63 0,#fbc02d 100%); border: 1px solid #eb4; box-shadow: 0 4px 0 #bc822c; }
+        .card:active .btn-gold-3d { box-shadow: 0 2px 0 #bc822c; transform: translateY(2px); }
+        .btn-gray-3d { background: linear-gradient(180deg,#ccc 0,#e6e6e6 100%); border: 1px solid #bbb; box-shadow: 0 4px 0 #a6a6a6; }
+        .card:active .btn-gray-3d { box-shadow: 0 2px 0 #a6a6a6; transform: translateY(2px); }
+        .payment-icons { width: 120px; height: auto; margin-top: 5px; display: block; }
+        .shipping-text { font-style: italic; font-size: 12px; margin-bottom: 5px; color: #000; }
+
+        @media (min-width: 769px) {
+            .pricing-container { flex-direction: row; align-items: center; justify-content: center; max-width: 1100px; gap: 25px; }
+            .pricing-container > div:nth-of-type(2) { order: 1; }
+            .pricing-container > a { order: 2; }
+            .pricing-container > div:first-of-type { order: 3; }
+            .desktop-card-wrapper { display: flex; flex-direction: column; flex: 0 0 300px; max-width: 300px; border: 3px solid #a6a6a6; border-radius: 18px; overflow: hidden; background: #fff; transition: transform .3s ease; margin-top: 0; }
+            .card.highlight { flex: 0 0 300px; max-width: 300px; transform: scale(1.1); z-index: 5; margin-top: 0; }
+            .desktop-card-wrapper:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,.15); z-index: 10; }
+            .card.highlight:hover { transform: scale(1.15); }
+            .card-row { flex-direction: column; padding: 15px; text-align: center; gap: 4px; }
+            .col-left, .col-right { display: contents; }
+            .col-left h3 { order: 1; margin-bottom: 0; }
+            .col-left .subtitle { order: 2; margin-bottom: 2px; }
+            .col-left .product-img { order: 3; width: 150px; margin: 15px 0; }
+            .col-left .product-img.product-img-lg { width: 200px; }
+            .col-right .unit-price-row { order: 4; justify-content: center; margin-bottom: 2px; }
+            .col-right .badges-container, .col-right .shipping-text { order: 5; margin-bottom: 8px; }
+            .col-right .btn-visual { order: 6; width: 90%; margin: 0 auto; }
+            .col-right .payment-icons { order: 7; margin-top: 5px; }
+            .col-left .total-price-row { order: 8; margin-top: 8px; margin-bottom: 0; }
+            .gray-header { display: block; padding: 8px; }
+            .desktop-card-wrapper .card.standard { border: none; border-radius: 0; box-shadow: none; }
+            .highlight-body.card-row { padding-top: 10px; padding-bottom: 15px; }
+        }
+
+        /* Estilos dos Depoimentos (Reviews) */
+        .nd-reviews-wrap { max-width: 680px; margin: 0 auto; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color: #1a1a1a; padding: 16px; background: #fff; }
+        .nd-title { font-size: 26px; font-weight: 800; line-height: 1.25; margin: 0 0 10px; color: #0f2a2c; }
+        .nd-title span { color: #3a9ba3; }
+        .nd-sub { font-size: 15px; color: #4a4a4a; margin: 0 0 22px; line-height: 1.5; }
+        .nd-img { width: 100%; border-radius: 14px; display: block; margin: 0 auto 22px; box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+        .nd-card { background: #fff; border: 1px solid #ececec; border-radius: 14px; padding: 18px; margin: 0 auto 16px; max-width: 680px; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+        .nd-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+        .nd-user { display: flex; align-items: center; gap: 12px; }
+        .nd-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #e8f5f6; display: block; }
+        .nd-name { font-weight: 700; font-size: 15px; color: #0f2a2c; }
+        .nd-verified { font-size: 12px; color: #3a9ba3; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+        .nd-stars { color: #f5a623; font-size: 16px; letter-spacing: 2px; margin-bottom: 6px; }
+        .nd-text { font-size: 14.5px; line-height: 1.55; color: #333; margin: 0; }
+        .nd-text strong { color: #0f2a2c; }
+        
+        .customer-heading-box { text-align: center; color: #000; padding: 20px 0; background: #ebebeb; }
+        .customer-heading-box .text-1 { font-size: 16px; font-weight: 700; }
+        .customer-heading-box .text-2 { font-size: 24px; font-weight: 700; margin: 5px 0; }
+        .customer-heading-box .text-3 { font-size: 16px; font-weight: 400; }
+        @media(max-width:520px){ .nd-title{font-size:22px} .nd-reviews-wrap{padding:12px} }
+
+        /* Seção da Garantia */
+        .guarantee-box-title { color: #7a7a7a; text-align: center; font-size: 27px; font-weight: 800; font-family: 'Poppins', sans-serif; margin-bottom: 25px; }
+        .guarantee-content-flex { display: flex; align-items: center; justify-content: center; gap: 30px; width: 65%; margin: 0 auto; }
+        .guarantee-text-block { font-family: "Segoe UI", sans-serif; font-weight: 400; color: #444; font-size: 16px; line-height: 1.5; }
+        .guarantee-text-block p { margin-bottom: 15px; }
+        .guarantee-badges-container { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 34%; margin: 30px auto 30px auto; }
+        .guarantee-badges-container img { width: 100%; max-width: 100%; height: auto; }
+        @media screen and (max-width: 1024px) {
+            .guarantee-content-flex { flex-direction: column; text-align: center; }
+        }
+        @media screen and (max-width: 480px) {
+            .guarantee-box-title { font-size: 22px; }
+            .guarantee-content-flex { width: 100%; }
+            .guarantee-badges-container { width: 98%; }
+        }
+
+        /* Estilos do Pop-up de Vendas Nativas */
+        .nd-pop { position: fixed; left: 20px; bottom: 20px; z-index: 99999; background: #3a9ba3; color: #fff; border-radius: 12px; padding: 12px 16px 12px 12px; display: none; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); max-width: 340px; min-width: 280px; font-family: Inter,Arial,sans-serif; }
+        .nd-pop.show { display: flex; animation: ndSlideIn .5s ease-out; }
+        .nd-pop.hide { animation: ndSlideOut .4s ease-in forwards; }
+        @keyframes ndSlideIn { from { transform: translateY(120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes ndSlideOut { from { transform: translateY(0); opacity: 1; } to { transform: translateY(120%); opacity: 0; } }
+        .nd-pop img { width: 80px; height: 80px; object-fit: contain; }
+        .nd-pop-body { flex: 1; min-width: 0; line-height: 1.25; }
+        .nd-pop-name { font-size: 13px; font-weight: 600; color: #fff; margin: 0 0 2px; }
+        .nd-pop-title { font-size: 16px; font-weight: 800; color: #ffd84d; margin: 0 0 4px; letter-spacing: .2px; }
+        .nd-pop-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #fff; }
+        .nd-pop-verified { display: inline-flex; align-items: center; gap: 3px; background: #fff; color: #3a9ba3; font-weight: 700; padding: 2px 7px; border-radius: 20px; font-size: 11px; }
+        .nd-pop-verified svg { width: 11px; height: 11px; }
+        .nd-pop-close { position: absolute; top: 6px; right: 8px; background: 0; border: 0; color: #fff; font-size: 18px; cursor: pointer; opacity: .7; }
+        @media(max-width:480px){ .nd-pop { left: 10px; right: 10px; bottom: 10px; max-width: none; min-width: 0; } .nd-pop img { width: 64px; height: 64px; } .nd-pop-title { font-size: 14px; } }
+    </style>
+    
+
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '922615390821057');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=922615390821057&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1038414865589159');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1038414865589159&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '985050667232004');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=985050667232004&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
+    <script>
+      var mysrc =
+        "https://tracking.buygoods.com/track/?a=12348&firstcookie=0" +
+        "&tracking_redirect=&referrer=" +
+        encodeURIComponent(document.referrer) +
+        "&sessid2=" +
+        ReadCookie("sessid2") +
+        "&product=ste6,ste6dtc,ste1,ste2,ste3,ste3177&vid1=&vid2=&vid3=&caller_url=" +
+        encodeURIComponent(window.location.href);
+      if (typeof add_to_cart !== "undefined") {
+        mysrc = mysrc + "&add_to_cart=" + add_to_cart;
+      }
+      var newScript = document.createElement("script");
+      newScript.type = "text/javascript";
+      newScript.defer = true;
+      newScript.src = mysrc;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(newScript, s);
+      function ReadCookie(name) {
+        name += "=";
+        var parts = document.cookie.split(/;\s*/);
+        for (var i = 0; i < parts.length; i++) {
+          var part = parts[i];
+          if (part.indexOf(name) == 0) return part.substring(name.length);
+        }
+        return "";
+      }
+    </script>
+    
+    <script type="text/javascript">
+      setTimeout(function () {
+        var i = document.createElement("iframe"),
+          oid = new URLSearchParams(window.location.search);
+        i.async = true;
+        i.style = "display:none";
+        i.setAttribute(
+          "src",
+          "https://buygoods.com/affiliates/go/conversion/iframe/bg?a=12348&t=c7bccdc20e329b13fdf744a0538da972&s=" +
+            ReadCookie("sessid2"),
+        );
+        document.body.appendChild(i);
+      }, 1000);
+    </script>
+    
+    
+</head>
+
+<body class="atomicat-disable-selection">
+
+    <div class="top-bar">
+        <strong>Attention: This presentation is only available until <span id="dataHoje"></span></strong>
+    </div>
+    <script>
+        function formatDateBR(date) {
+            const d = new Date(date);
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            return `${month}/${day}/${year}`;
+        }
+        document.getElementById('dataHoje').textContent = formatDateBR(new Date());
+    </script>
+
+    <div class="vsl-container">
+        <div style="aspect-ratio:1.77777">
+         <vturb-smartplayer id="vid-6a150410ed6ff67b2492b69b" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/45521673-96f5-49cf-b157-586379ebfee7/players/6a150410ed6ff67b2492b69b/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+        </div>
+    </div>
+    
+    <style>
+  .esconder {
+    display: none;
+  }
+</style>
+
+<script>
+  var delaySeconds = 2029;
+  var player = document.querySelector("vturb-smartplayer");
+  player.addEventListener("player:ready", function() {
+    player.displayHiddenElements(delaySeconds, [".esconder"], {
+      persist: true
+    });
+  });
+</script>
+    <div class="esconder">
+    <div class="urgency-section">
+        <h2>Secure your discounted Vigor Boost now<br><br>Only while supplies last!</h2>
+        <h1><span id="atomicat-countdown-text-2a3cf977" class="atomicat-countdown-text">19:59</span></h1><br>
+    </div>
+
+    <div class="gray-section">
+        
+        <div class="section-arrow">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+                <path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"></path>
+            </svg>
+        </div>
+
+        <div class="pricing-wrapper">
+            <div class="pricing-container">
+                <a href="https://steel-power.mycartpanda.com/checkout/206630030:1?afid=PWl86bnlVe" class="highlight card smartplayer-click-event">
+                    <div class="highlight-header">MOST POPULAR!</div>
+                    <div class="card-row highlight-body">
+                        <div class="col-left">
+                            <h3>6 BOTTLES</h3>
+                            <div class="subtitle">180-Day Supply</div>
+                            <img src="images/stell6.webp" alt="6 Bottles" class="product-img product-img-lg" width="150" height="150" fetchpriority="high">
+                            <div class="total-price-row"><span class="strike-red">$1074</span> $294</div>
+                        </div>
+                        <div class="col-right">
+                            <div class="unit-price-row"><span class="currency-symbol">$</span><span class="big-number">49</span><span class="per-unit">/Bottle</span></div>
+                            <div class="badges-container">
+                                <div class="badge bg-red">
+                                    <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> VIP Support
+                                </div>
+                                <div class="badge bg-black">
+                                    <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> FREE BONUS!
+                                </div>
+                                <div class="bg-green badge">
+                                    <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> Free Shipping
+                                </div>
+                            </div>
+                            <div class="btn-visual btn-gold-3d btn-6flaschen">Buy Now
+                                <svg viewBox="0 0 576 512" fill="currentColor">
+                                    <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20l44 0 0 44c0 11 9 20 20 20s20-9 20-20l0-44 44 0c11 0 20-9 20-20s-9-20-20-20l-44 0 0-44c0-11-9-20-20-20s-20 9-20 20l0 44-44 0c-11 0-20 9-20 20z"></path>
+                                </svg>
+                            </div>
+                            <img src="images/nqkNHJ5101409.webp" alt="Payment Methods" class="payment-icons" width="120" height="25" loading="lazy">
+                        </div>
+                    </div>
+                </a>
+
+                <div class="desktop-card-wrapper">
+                    <div class="gray-header">BUNDLE</div>
+                    <a href="https://steel-power.mycartpanda.com/checkout/206630028:1?afid=PWl86bnlVe" class="standard card smartplayer-click-event" style="height:100%">
+                        <div class="card-row">
+                            <div class="col-left">
+                                <h3>3 BOTTLES</h3>
+                                <div class="subtitle">90-Day Supply</div>
+                                <img src="images/stell3.webp" alt="3 Bottles" class="product-img-lg product-img" width="150" height="150" loading="lazy">
+                                <div class="total-price-row"><span class="strike-red">$537</span> $207</div>
+                            </div>
+                            <div class="col-right">
+                                <div class="unit-price-row"><span class="currency-symbol">$</span><span class="big-number">69</span><span class="per-unit">/Bottle</span></div>
+                                <div class="badges-container">
+                                    <div class="bg-black badge">
+                                        <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> FREE BONUS!
+                                    </div>
+                                    <div class="badge bg-green">
+                                        <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> Free Shipping
+                                    </div>
+                                </div>
+                                <div class="btn-gray-3d btn-visual">Buy Now
+                                    <svg viewBox="0 0 576 512" fill="currentColor">
+                                        <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20l44 0 0 44c0 11 9 20 20 20s20-9 20-20l0-44 44 0c11 0 20-9 20-20s-9-20-20-20l-44 0 0-44c0-11-9-20-20-20s-20 9-20 20l0 44-44 0c-11 0-20 9-20 20z"></path>
+                                    </svg>
+                                </div>
+                                <img src="images/cxexyF0026619.webp" alt="Payment Methods" class="payment-icons" width="120" height="25" loading="lazy">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="desktop-card-wrapper">
+                    <div class="gray-header">STARTER</div>
+                    <a href="https://steel-power.mycartpanda.com/checkout/206630026:1?afid=PWl86bnlVe" class="standard card smartplayer-click-event" style="height:100%">
+                        <div class="card-row">
+                            <div class="col-left">
+                                <h3>2 BOTTLES</h3>
+                                <div class="subtitle">30-Day Supply</div>
+                                <img src="images/stell2.webp" alt="2 Bottle" class="product-img" width="150" height="150" loading="lazy">
+                                <div class="total-price-row"><span class="strike-red">$358</span> $158</div>
+                            </div>
+                            <div class="col-right">
+                                <div class="unit-price-row"><span class="currency-symbol">$</span><span class="big-number">79</span><span class="per-unit">/Bottle</span></div>
+                                <div class="shipping-text">+ $9.99 Shipping</div>
+                                <div class="btn-gray-3d btn-visual">Buy Now
+                                    <svg viewBox="0 0 576 512" fill="currentColor">
+                                        <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20l44 0 0 44c0 11 9 20 20 20s20-9 20-20l0-44 44 0c11 0 20-9 20-20s-9-20-20-20l-44 0 0-44c0-11-9-20-20-20s-20 9-20 20l0 44-44 0c-11 0-20 9-20 20z"></path>
+                                    </svg>
+                                </div>
+                                <img src="images/cxexyF0026619.webp" alt="Payment Methods" class="payment-icons" width="120" height="25" loading="lazy">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="nd-reviews-wrap">
+            <h2 class="nd-title"><span>The</span> Real VigorBoost® Users.<br>Life Changing Results.</h2>
+            <p class="nd-sub">See what thousands of men are saying after adding VigorBoost to their daily routine no more weak erections, no more performance anxiety… just rock-hard results and confidence that lasts all night..</p>
+            
+            
+            <div class="nd-card">
+                <div class="nd-head">
+                    <div class="nd-user">
+                        <img class="nd-avatar" src="images/YgapzG4316709.webp" alt="James Miller"> 
+                        <span class="nd-name">James Miller</span>
+                    </div>
+                    <span class="nd-verified">✓ Verified Purchase</span>
+                </div>
+                <div class="nd-stars">★★★★★</div>
+                <p class="nd-text">"I was honestly skeptical at first 🤔… but after a few weeks on VigorBoost, I started noticing a real difference. At 62, I wasn’t expecting this kind of performance again 💪. Stronger, longer-lasting results and way more confidence in the bedroom."</p>
+            </div>
+
+            <div class="nd-card">
+                <div class="nd-head">
+                    <div class="nd-user">
+                        <img class="nd-avatar" src="images/XbFCYG6833801.jpeg" alt="John Reed"> 
+                        <span class="nd-name">John Reed</span>
+                    </div>
+                    <span class="nd-verified">✓ Verified Purchase</span>
+                </div>
+                <div class="nd-stars">★★★★★</div>
+                <p class="nd-text">"I’m 58 and thought those days were long gone 😅… but this completely surprised me. No more awkward moments, just solid performance and feeling like myself again. My confidence is back 🔥"</p>
+            </div>
+
+            <div class="nd-card">
+                <div class="nd-head">
+                    <div class="nd-user">
+                        <img class="nd-avatar" src="images/MpDPdX4316709.webp" alt="Michael B."> 
+                        <span class="nd-name">Michael B.</span>
+                    </div>
+                    <span class="nd-verified">✓ Verified Purchase</span>
+                </div>
+                <div class="nd-stars">★★★★★</div>
+                <p class="nd-text">"Day 5 and I feel like a completely different man. Energy through the roof, confidence back, everything working like it should 💪<br><br>Wasnt even a full week and my wife asked what got into me lol. Told her it was vitamins 😅 close enough right"</p>
+            </div>
+            
+            
+        </div>
+
+        <div class="customer-heading-box">
+            <p class="text-1">What our customers say</p>
+            <p class="text-2">⭐️⭐️⭐️⭐️⭐️ ☑️ 4.91/5</p>
+            <p class="text-3">Based on over 79,200 reviews!</p>
+        </div>
+
+        <div style="padding-top: 25px; padding-bottom: 0px;">
+            <div class="guarantee-box-title">
+                <h2><span style="background-color:#ebebeb">100% Satisfaction or Your Money Back</span></h2>
+                <h2><strong style="background-color:#ebebeb">60-Day Unconditional Guarantee</strong></h2>
+            </div>
+
+            <div class="guarantee-content-flex">
+                <div>
+                    <img loading="lazy" width="200" height="200" src="images/eMmJzh2803597.webp" alt="Image">
+                </div>
+                <div class="guarantee-text-block">
+                    <p>We're so certain that VigorBoost will give you remarkable results that we're willing to shoulder all the risk for a full 60 days. From the moment your order arrives, start taking VigortBoost daily and pay close attention to how you feel.</p>
+                    <p>If at any point during these 60 days you don't feel VigortBoost is delivering on the promise we've made, just let us know. Our team will refund every penny, no questions asked.</p>
+                </div>
+            </div>
+
+           
+        </div>
+
+        <div class="pricing-wrapper" style="padding-top: 50px;">
+            <div class="pricing-container">
+                <a href="https://steel-power.mycartpanda.com/checkout/206630030:1?afid=PWl86bnlVe" class="highlight card smartplayer-click-event">
+                    <div class="highlight-header">MOST POPULAR!</div>
+                    <div class="card-row highlight-body">
+                        <div class="col-left">
+                            <h3>6 BOTTLES</h3>
+                            <div class="subtitle">180-Day Supply</div>
+                            <img src="images/stell6.webp" alt="6 Bottles" class="product-img product-img-lg" width="150" height="150" fetchpriority="high">
+                            <div class="total-price-row"><span class="strike-red">$1074</span> $294</div>
+                        </div>
+                        <div class="col-right">
+                            <div class="unit-price-row"><span class="currency-symbol">$</span><span class="big-number">49</span><span class="per-unit">/Bottle</span></div>
+                            <div class="badges-container">
+                                <div class="badge bg-red">
+                                    <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> VIP Support
+                                </div>
+                                <div class="badge bg-black">
+                                    <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> FREE BONUS!
+                                </div>
+                                <div class="bg-green badge">
+                                    <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> Free Shipping
+                                </div>
+                            </div>
+                            <div class="btn-visual btn-gold-3d btn-6flaschen">Buy Now
+                                <svg viewBox="0 0 576 512" fill="currentColor">
+                                    <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20l44 0 0 44c0 11 9 20 20 20s20-9 20-20l0-44 44 0c11 0 20-9 20-20s-9-20-20-20l-44 0 0-44c0-11-9-20-20-20s-20 9-20 20l0 44-44 0c-11 0-20 9-20 20z"></path>
+                                </svg>
+                            </div>
+                            <img src="images/nqkNHJ5101409.webp" alt="Payment Methods" class="payment-icons" width="120" height="25" loading="lazy">
+                        </div>
+                    </div>
+                </a>
+
+                <div class="desktop-card-wrapper">
+                    <div class="gray-header">BUNDLE</div>
+                    <a href="https://steel-power.mycartpanda.com/checkout/206630028:1?afid=PWl86bnlVe" class="standard card smartplayer-click-event" style="height:100%">
+                        <div class="card-row">
+                            <div class="col-left">
+                                <h3>3 BOTTLES</h3>
+                                <div class="subtitle">90-Day Supply</div>
+                                <img src="images/stell3.webp" alt="3 Bottles" class="product-img-lg product-img" width="150" height="150" loading="lazy">
+                                <div class="total-price-row"><span class="strike-red">$537</span> $207</div>
+                            </div>
+                            <div class="col-right">
+                                <div class="unit-price-row"><span class="currency-symbol">$</span><span class="big-number">69</span><span class="per-unit">/Bottle</span></div>
+                                <div class="badges-container">
+                                    <div class="bg-black badge">
+                                        <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> FREE BONUS!
+                                    </div>
+                                    <div class="badge bg-green">
+                                        <svg viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> Free Shipping
+                                    </div>
+                                </div>
+                                <div class="btn-gray-3d btn-visual">Buy Now
+                                    <svg viewBox="0 0 576 512" fill="currentColor">
+                                        <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20l44 0 0 44c0 11 9 20 20 20s20-9 20-20l0-44 44 0c11 0 20-9 20-20s-9-20-20-20l-44 0 0-44c0-11-9-20-20-20s-20 9-20 20l0 44-44 0c-11 0-20 9-20 20z"></path>
+                                    </svg>
+                                </div>
+                                <img src="images/cxexyF0026619.webp" alt="Payment Methods" class="payment-icons" width="120" height="25" loading="lazy">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="desktop-card-wrapper">
+                    <div class="gray-header">STARTER</div>
+                    <a href="https://steel-power.mycartpanda.com/checkout/206630026:1?afid=PWl86bnlVe" class="standard card smartplayer-click-event" style="height:100%">
+                        <div class="card-row">
+                            <div class="col-left">
+                                <h3>2 BOTTLES</h3>
+                                <div class="subtitle">30-Day Supply</div>
+                                <img src="images/stell2.webp" alt="2 Bottle" class="product-img" width="150" height="150" loading="lazy">
+                                <div class="total-price-row"><span class="strike-red">$358</span> $158</div>
+                            </div>
+                            <div class="col-right">
+                                <div class="unit-price-row"><span class="currency-symbol">$</span><span class="big-number">79</span><span class="per-unit">/Bottle</span></div>
+                                <div class="shipping-text">+ $9.99 Shipping</div>
+                                <div class="btn-gray-3d btn-visual">Buy Now
+                                    <svg viewBox="0 0 576 512" fill="currentColor">
+                                        <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20l44 0 0 44c0 11 9 20 20 20s20-9 20-20l0-44 44 0c11 0 20-9 20-20s-9-20-20-20l-44 0 0-44c0-11-9-20-20-20s-20 9-20 20l0 44-44 0c-11 0-20 9-20 20z"></path>
+                                    </svg>
+                                </div>
+                                <img src="images/cxexyF0026619.webp" alt="Payment Methods" class="payment-icons" width="120" height="25" loading="lazy">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="ndPop" class="nd-pop">
+        <button class="nd-pop-close" onclick="ndClosePop()">×</button> 
+        <img id="ndPopImg" src="" alt="Product">
+        <div class="nd-pop-body">
+            <p class="nd-pop-name" id="ndPopName"></p>
+            <p class="nd-pop-title" id="ndPopTitle"></p>
+            <div class="nd-pop-meta">
+                <span id="ndPopTime"></span> 
+                <span class="nd-pop-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.39 4.84L20 7.91l-4 3.9.94 5.5L12 14.77 7.06 17.3 8 11.81l-4-3.9 5.61-1.07L12 2z"></path></svg> VERIFIED
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+          var INTERVAL_BETWEEN = 10; 
+          var VISIBLE_TIME = 6;      
+          var BOTTLE_IMAGES = {
+            2: "images/stell2.webp",
+            3: "images/stell3.webp",
+            6: "images/stell6.webp"
+          };
+          var PEOPLE = ["Benjamin","Michael","James","William","Daniel","Christopher","David","Henry","John","Robert","Thomas","Joseph","Matthew","Anthony","Mark","Richard","Charles","Paul","Steven","Andrew"];
+          var CITIES = ["St. Louis, MO","Austin, TX","Denver, CO","Tampa, FL","Columbus, OH","Portland, OR","Tulsa, OK","Phoenix, AZ","Dallas, TX","Miami, FL"];
+          var QTYS = [2, 3, 6]; 
+        
+          var pop = document.getElementById('ndPop');
+          var imgEl = document.getElementById('ndPopImg');
+          var nameEl = document.getElementById('ndPopName');
+          var titleEl = document.getElementById('ndPopTitle');
+          var timeEl = document.getElementById('ndPopTime');
+          var hideTimer;
+        
+          function showPopup(){
+            var qty = QTYS[Math.floor(Math.random()*QTYS.length)];
+            var person = PEOPLE[Math.floor(Math.random()*PEOPLE.length)];
+            var city = CITIES[Math.floor(Math.random()*CITIES.length)];
+            
+            nameEl.textContent = person + " from " + city;
+            titleEl.textContent = "Just Bought " + qty + " Bottles"; 
+            timeEl.textContent = Math.floor(Math.random()*58 + 2) + " min ago";
+            imgEl.src = BOTTLE_IMAGES[qty];
+            
+            pop.classList.remove('hide');
+            pop.classList.add('show');
+            
+            hideTimer = setTimeout(function(){
+              pop.classList.add('hide');
+              setTimeout(function(){pop.classList.remove('show')}, 400);
+            }, VISIBLE_TIME * 1000);
+          }
+          
+          window.ndClosePop = function(){
+            pop.classList.add('hide');
+            setTimeout(function(){pop.classList.remove('show')}, 400);
+          };
+        
+          setTimeout(showPopup, 3000);
+          setInterval(showPopup, (VISIBLE_TIME + INTERVAL_BETWEEN) * 1000);
+        })();
+    </script>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var countdownElement = document.getElementById('atomicat-countdown-text-2a3cf977');
+    
+    // IMPORTANTE: Coloque aqui a mesma classe ou ID que você usa para esconder seus potes/oferta
+    var targetElement = document.querySelector('.esconder'); 
+    
+    if (!countdownElement || !targetElement) return;
+
+    var totalSeconds = 19 * 60 + 59; 
+    var started = false;
+
+    // Função que faz o cronômetro rodar
+    function iniciarContagem() {
+      if (started) return; 
+      started = true;
+
+      var timer = setInterval(function() {
+        if (totalSeconds <= 0) {
+          clearInterval(timer);
+          countdownElement.textContent = "00:00";
+          return;
+        }
+
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+
+        var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+        var formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+
+        countdownElement.textContent = formattedMinutes + ":" + formattedSeconds;
+        
+        totalSeconds--;
+      }, 1000);
+    }
+
+    // Verifica se os potes JÁ ESTÃO visíveis (caso do "persist: true" se o usuário atualizou a página)
+    if (window.getComputedStyle(targetElement).display !== 'none') {
+      iniciarContagem();
+    } else {
+      // Se ainda estiverem escondidos, cria um "vigia" que espera o momento exato da Vturb mostrar os potes
+      var observer = new MutationObserver(function(mutations) {
+        if (window.getComputedStyle(targetElement).display !== 'none') {
+          iniciarContagem();
+          observer.disconnect(); // Desliga o vigia para não pesar a página
+        }
+      });
+
+      // Ativa o vigia para monitorar qualquer mudança de estilo ou classe nos potes da oferta
+      observer.observe(targetElement, { attributes: true, attributeFilter: ['style', 'class'] });
+    }
+  });
+</script>
+
+    
+    </div>
+    
+    <script>
+    (function() {
+        function corrigirLinksBuyGoods() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const realSubid = urlParams.get('subid');
+
+            if (!realSubid) return; 
+
+            const botoes = document.querySelectorAll('a[href*="buygoods.com/secure/checkout.html"]');
+            
+            botoes.forEach(function(botao) {
+                let href = botao.getAttribute('href');
+                
+                if (href && !href.includes('&subid=' + realSubid)) {
+                    botao.setAttribute('href', href + '&subid=' + encodeURIComponent(realSubid));
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", corrigirLinksBuyGoods);
+        setInterval(corrigirLinksBuyGoods, 1000); // Mantém ativo caso a VTurb mexer depois
+    })();
+    </script>
+    
+    <script src="js/pote.js"></script>
+    
+    
+
+</body></html>
