@@ -1,9 +1,75 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
+
+<script>
+// Função para obter parâmetros da URL
+function getURLParameter(name) {
+ return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+
+// Função para remover um parâmetro específico da URL
+function removeURLParameter(url, parameter) {
+ var urlparts = url.split('?');
+ if (urlparts.length >= 2) {
+  var prefix = encodeURIComponent(parameter) + '=';
+  var pars = urlparts[1].split(/[&;]/g);
+  for (var i = pars.length; i-- > 0;) {
+   if (pars[i].lastIndexOf(prefix, 0) !== -1) {
+    pars.splice(i, 1);
+   }
+  }
+  return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+ }
+ return url;
+}
+
+// Verifica se o usuário já foi redirecionado anteriormente
+if (localStorage.getItem('userRedirected') === 'true') {
+ // Redireciona o usuário para outra página (por exemplo, página inicial)
+ window.location.href = "https://readings.spiritualsociety.com/dahlia-pick/";
+} else if (localStorage.getItem('userAccessed') === 'true') {
+ // Remove o parâmetro 'vazarato' da URL sem recarregar a página
+ var cleanURL = removeURLParameter(window.location.href, 'vazarato');
+ history.replaceState(null, null, cleanURL);
+} else {
+ // Verifica se a página foi acessada com o parâmetro correto
+ if (getURLParameter('vazarato') !== 'true') {
+  // Armazena no localStorage que o usuário foi redirecionado
+  localStorage.setItem('userRedirected', 'true');
+  // Redireciona o usuário para outra página (por exemplo, página inicial)
+  window.location.href = "https://readings.spiritualsociety.com/dahlia-pick/";
+ } else {
+  // Armazena no localStorage que o usuário acessou a página corretamente
+  localStorage.setItem('userAccessed', 'true');
+  // Remove o parâmetro 'vazarato' da URL sem recarregar a página
+  var cleanURL = removeURLParameter(window.location.href, 'vazarato');
+  history.replaceState(null, null, cleanURL);
+ }
+}
+</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1531737731277028');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1531737731277028&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+	
 	<meta charset="UTF-8">
-			<title>VSL6</title>
+			<title>LT LD 01</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="max-image-preview:large">
-<title>VSL6</title>
+<title>LT LD 01</title>
 <link rel="alternate" type="application/rss+xml" title="Feed para https://magneticdesire.site �" href="https://magneticdesire.site/feed/">
 <link rel="alternate" type="application/rss+xml" title="Feed de comentários para https://magneticdesire.site �" href="https://magneticdesire.site/comments/feed/">
 <link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://magneticdesire.site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmagneticdesire.site%2Fvsl6-teste%2F">
@@ -120,7 +186,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-element elementor-element-93e304b elementor-widget elementor-widget-html" data-id="93e304b" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
 					<script>
   // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
-  const link = "https://loveandwellness.online/back-redirect/";
+  const link = 'https://loveandwellness.online/back-redirect/';
 
   function setBackRedirect(url) {
     let urlBackRedirect = url;
@@ -144,8 +210,9 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   setBackRedirect(link);
 </script>				</div>
 				<div class="elementor-element elementor-element-14482f3 elementor-widget elementor-widget-html" data-id="14482f3" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+					
 					<script>
-  window.pixelId = "68b9ea23c36cb4ff429007fc";
+  window.pixelId = "6a474e772c99c4809af4cd63";
   var a = document.createElement("script");
   a.setAttribute("async", "");
   a.setAttribute("defer", "");
@@ -161,10 +228,10 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>What you're about to discover could make any man obsessed with you</title>
-    <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-<link rel="preload" href="https://scripts.converteai.net/81d625dd-b729-4291-9176-b1b5e1565068/players/6a41baa3d846aeb492a313c1/v4/player.js" as="script">
+   <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/45521673-96f5-49cf-b157-586379ebfee7/players/6a440d15ad0edd1df2493b69/v4/player.js" as="script">
 <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-<link rel="preload" href="https://cdn.converteai.net/81d625dd-b729-4291-9176-b1b5e1565068/69b19a18326f38ad99faaa8c/main.m3u8" as="fetch">
+<link rel="preload" href="https://cdn.converteai.net/45521673-96f5-49cf-b157-586379ebfee7/6a440cfdd09a45712e8ec642/main.m3u8" as="fetch">
 <link rel="dns-prefetch" href="https://cdn.converteai.net">
 <link rel="dns-prefetch" href="https://scripts.converteai.net">
 <link rel="dns-prefetch" href="https://images.converteai.net">
@@ -311,7 +378,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
       <!-- ── VÍDEO + RAIL DE AÇÕES ── -->
       <div class="stage">
         <div class="player-wrap">
-         <vturb-smartplayer id="vid-6a440d15ad0edd1df2493b69" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 178.21782178217822% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/45521673-96f5-49cf-b157-586379ebfee7/players/6a440d15ad0edd1df2493b69/v4/player.js", s.async=!0,document.head.appendChild(s); </script>        </div>
+        <vturb-smartplayer id="vid-6a440d15ad0edd1df2493b69" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 178.21782178217822% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/45521673-96f5-49cf-b157-586379ebfee7/players/6a440d15ad0edd1df2493b69/v4/player.js", s.async=!0,document.head.appendChild(s); </script>        </div>
 
         <div class="rail">
           <button id="likeBtn" class="rail-btn" type="button" aria-pressed="false">
