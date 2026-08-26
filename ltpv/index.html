@@ -723,7 +723,13 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 //# sourceURL=https://magneticdesire.site/wp-includes/js/wp-emoji-loader.min.js
 </script>
 	
-
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn').forEach(function (element) {
+        element.classList.add('smartplayer-click-event');
+    });
+});
+</script>
 
 
 </body></html><!-- Page cached by LiteSpeed Cache 7.8.1 on 2026-06-30 15:39:52 -->
