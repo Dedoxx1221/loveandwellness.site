@@ -1,0 +1,1654 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tantra – caminhodocorpo.com</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #d41111;
+            --primary-dark: #8b0000;
+            --black: #000000;
+            --dark-gray: #111111;
+            --medium-gray: #1a1a1a;
+            --light-gray: #333333;
+            --white: #ffffff;
+            --off-white: #f9f9f9;
+            --accent-beige: #cfcabe;
+            --accent-tan: #c2a990;
+            --border-red: rgba(212, 17, 17, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.55;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cardo', serif;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-red { color: var(--primary-red); }
+        .bg-black { background: var(--black); }
+        .bg-dark { background: var(--dark-gray); }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            background: var(--black);
+            padding: 4rem 0;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-red);
+        }
+
+        .hero h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .hero h1 span {
+            color: var(--primary-red);
+            font-weight: 700;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--white);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-image {
+            max-width: 600px;
+            margin: 2rem auto;
+            border: 2px solid var(--border-red);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(212, 17, 17, 0.3);
+            position: relative;
+            height: 320px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Transição crossfade: 5s exibição + 2s transição = 7s por imagem (14s ciclo completo) */
+        .hero-image .hero-slide:first-child {
+            opacity: 1;
+            animation: heroFade1 14s ease-in-out infinite;
+        }
+
+        .hero-image .hero-slide:last-child {
+            opacity: 0;
+            animation: heroFade2 14s ease-in-out infinite;
+        }
+
+        @keyframes heroFade1 {
+            0%, 35.7% { opacity: 1; }
+            42.9%, 57.1% { opacity: 0; }
+            64.3%, 100% { opacity: 1; }
+        }
+
+        @keyframes heroFade2 {
+            0%, 35.7% { opacity: 0; }
+            42.9%, 57.1% { opacity: 1; }
+            64.3%, 100% { opacity: 0; }
+        }
+
+        /* ==================== FEATURES SECTION ==================== */
+        .features {
+            background: var(--dark-gray);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--primary-red);
+            text-align: left;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            color: var(--primary-red);
+        }
+
+        .feature-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--primary-red);
+        }
+
+        .feature-text {
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        /* ==================== VIDEO SECTION ==================== */
+        .video-section {
+            background: var(--black);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .video-section h2 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Mockup Notebook */
+        .notebook-mockup {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
+        }
+
+        .notebook-screen {
+            position: relative;
+            background: #e8e8e8;
+            border-radius: 14px 14px 0 0;
+            border: 12px solid #e0e0e0;
+            border-bottom: 16px solid #d0d0d0;
+            padding: 0;
+            box-shadow: inset 0 0 0 1px #bbb, 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .notebook-screen::before {
+            content: '';
+            display: block;
+            width: 7px;
+            height: 7px;
+            background: #c8c8c8;
+            border-radius: 50%;
+            margin: 5px auto 5px;
+            border: 1px solid #b0b0b0;
+        }
+
+        .notebook-screen img {
+            width: 100%;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .notebook-screen .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .notebook-screen .play-overlay svg {
+            width: 52px;
+            height: 52px;
+            opacity: 0.9;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+        }
+
+        /* Estilo 1: MacBook branco */
+        .notebook-style-1 .notebook-screen {
+            border-color: #e2e2e2;
+            border-bottom-color: #d4d4d4;
+        }
+
+        .notebook-base-1 {
+            background: linear-gradient(to bottom, #e0e0e0, #d0d0d0);
+            height: 20px;
+            border-radius: 0 0 4px 4px;
+            position: relative;
+            margin: 0;
+            box-shadow: 0 1px 0 #bbb;
+        }
+
+        .notebook-base-1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 8%;
+            right: 8%;
+            height: 8px;
+            background: linear-gradient(to bottom, #d0d0d0, #b8b8b8);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+        }
+
+        /* Estilo 2: MacBook branco (ligeiramente diferente) */
+        .notebook-style-2 .notebook-screen {
+            border-color: #dcdcdc;
+            border-bottom-color: #cacaca;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .notebook-base-2 {
+            background: linear-gradient(to bottom, #dedede, #cacaca);
+            height: 22px;
+            border-radius: 0 0 4px 4px;
+            position: relative;
+            box-shadow: 0 1px 0 #b4b4b4;
+        }
+
+        .notebook-base-2::before {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55px;
+            height: 4px;
+            background: #c0c0c0;
+            border-radius: 2px;
+        }
+
+        .notebook-base-2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 5%;
+            right: 5%;
+            height: 8px;
+            background: linear-gradient(to bottom, #cecece, #b0b0b0);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 16px rgba(0,0,0,0.35);
+        }
+
+        /* ==================== CONTENT SECTIONS ==================== */
+        .content-section {
+            padding: 4rem 0;
+            background: var(--dark-gray);
+        }
+
+        .content-section:nth-child(even) {
+            background: var(--black);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-grid.reverse {
+            direction: rtl;
+        }
+
+        .content-grid.reverse > * {
+            direction: ltr;
+        }
+
+        .content-image {
+            border: 2px solid var(--primary-red);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000000;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content-text h2 {
+            font-size: 1.75rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-text p {
+            color: var(--off-white);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .check-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--white);
+        }
+
+        .check-list li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        /* ==================== MODULES GRID ==================== */
+        .modules-section {
+            background: var(--black);
+            padding: 4rem 0;
+        }
+
+        .modules-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--white);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .module-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-red);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .module-card:hover {
+            border-color: var(--primary-red);
+            transform: translateX(5px);
+        }
+
+        .module-number {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-red);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--white);
+            flex-shrink: 0;
+            font-family: 'Cardo', serif;
+        }
+
+        .module-content h4 {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .module-content p {
+            font-size: 0.9rem;
+            color: var(--accent-beige);
+        }
+
+        /* ==================== MASSAGE TYPES ==================== */
+        .massage-types {
+            background: var(--dark-gray);
+            padding: 4rem 0;
+        }
+
+        .massage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .massage-card {
+            background: var(--medium-gray);
+            border: 2px solid var(--primary-red);
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .massage-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .massage-card h3 {
+            padding: 1.5rem;
+            color: var(--white);
+            font-size: 1.25rem;
+            background: rgba(212, 17, 17, 0.1);
+        }
+
+        /* ==================== BONUS SECTION ==================== */
+        .bonus-section {
+            background: var(--black);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .bonus-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .bonus-section h2 span {
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .bonus-card {
+            background: var(--dark-gray);
+            border: 2px solid var(--primary-red);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .bonus-card::before {
+            content: 'BÔNUS';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .bonus-image {
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--accent-tan);
+        }
+
+        .bonus-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .bonus-card h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .bonus-value {
+            text-decoration: line-through;
+            color: var(--light-gray);
+            font-size: 1.25rem;
+        }
+
+        .bonus-free {
+            color: var(--primary-red);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        /* ==================== CERTIFICATE ==================== */
+        .certificate-section {
+            background: var(--dark-gray);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .certificate-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .certificate-section p {
+            color: var(--off-white);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .certificate-image {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 3px solid var(--primary-red);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .certificate-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==================== PRICING SECTION ==================== */
+        .pricing-section {
+            background: var(--black);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .pricing-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--dark-gray);
+            border: 2px solid var(--primary-red);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        .pricing-options {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .plano-oferta-box {
+            background: var(--dark-gray);
+            border: 2px solid var(--primary-red);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        .plano-oferta-box h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        .plano-subtitulo {
+            color: var(--off-white);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .plano-premium {
+            border-color: #228b22;
+            box-shadow: 0 0 26px rgba(34, 139, 34, 0.2);
+        }
+
+        .plano-premium .current-price {
+            color: #228b22;
+        }
+
+        .plano-premium .btn-buy {
+            background: #228b22;
+        }
+
+        .plano-premium .btn-buy:hover {
+            background: #1b6e1b;
+            box-shadow: 0 10px 30px rgba(34, 139, 34, 0.4);
+        }
+
+        .plano-premium .pricing-list li::before {
+            color: #228b22;
+        }
+
+        .plano-premium .pricing-badge {
+            background: #228b22;
+        }
+
+        .plano-basico .current-price {
+            color: var(--white);
+            animation: none;
+        }
+
+        .plano-basico .btn-buy {
+            background: #7a0000;
+        }
+
+        .plano-basico .btn-buy:hover {
+            background: #5e0000;
+            box-shadow: 0 10px 30px rgba(122, 0, 0, 0.35);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            white-space: nowrap;
+        }
+
+        .pricing-list {
+            list-style: none;
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .pricing-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--white);
+        }
+
+        .pricing-list li::before {
+            content: '✓';
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        .old-price {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            font-family: Arial, sans-serif;
+            text-decoration: line-through;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .current-price {
+            font-size: 4.25rem;
+            font-weight: 700;
+            color: #aaff00;
+            font-family: Arial, sans-serif;
+            animation: pulse 2s infinite;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .btn-buy {
+            display: inline-block;
+            background: #aaff00;
+            color: var(--white);
+            padding: 1.25rem 3rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .btn-buy:hover {
+            background: #88cc00;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(170, 255, 0, 0.4);
+        }
+
+        /* ==================== FAQ SECTION ==================== */
+        .faq-section {
+            background: var(--dark-gray);
+            padding: 4rem 0;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--white);
+        }
+
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--medium-gray);
+            border: 2px solid var(--primary-red);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.25rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary-red);
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '−';
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            padding: 0 1.25rem 1.25rem;
+            color: var(--off-white);
+        }
+
+        /* ==================== TESTIMONIALS ==================== */
+        .testimonials-section {
+            background: var(--black);
+            padding: 4rem 0;
+        }
+
+        .testimonials-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--dark-gray);
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid var(--primary-red);
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-content {
+            flex: 1;
+        }
+
+        .testimonial-username {
+            color: var(--white);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-text {
+            color: var(--off-white);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-meta {
+            color: var(--light-gray);
+            font-size: 0.8rem;
+        }
+
+        /* ==================== GUARANTEE SECTION ==================== */
+        .guarantee-section {
+            background: var(--dark-gray);
+            padding: 4rem 0;
+        }
+
+        .guarantee-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .guarantee-image {
+            width: 210px;
+            height: 210px;
+            flex-shrink: 0;
+        }
+
+        .guarantee-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .guarantee-content h2 {
+            font-size: 1.75rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .guarantee-content p {
+            color: var(--off-white);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .guarantee-content strong {
+            color: var(--primary-red);
+        }
+
+        .btn-guarantee {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .purchase-notification {
+            position: fixed;
+            left: 1rem;
+            bottom: 1rem;
+            max-width: 320px;
+            background: rgba(17, 17, 17, 0.96);
+            border: 1px solid rgba(34, 139, 34, 0.6);
+            border-left: 4px solid #228b22;
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            pointer-events: none;
+        }
+
+        .purchase-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .purchase-notification strong {
+            color: #228b22;
+        }
+
+        .purchase-notification p {
+            margin: 0;
+            color: var(--off-white);
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--black);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 2px solid var(--primary-red);
+        }
+
+        footer p {
+            color: var(--light-gray);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-grid,
+            .guarantee-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-grid.reverse {
+                direction: ltr;
+            }
+
+            .guarantee-image {
+                margin: 0 auto;
+            }
+
+            .guarantee-content {
+                text-align: center;
+            }
+
+            .purchase-notification {
+                left: 0.75rem;
+                right: 0.75rem;
+                bottom: 0.75rem;
+                max-width: none;
+            }
+        }
+    </style>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-18443377569"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18443377569');
+</script>
+  <!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1779131653061887');
+  fbq('track', 'PageView');
+</script>
+
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1779131653061887&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
+<script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+<script>(function(){var p_98=atob("DCQQdRp+o6s1ESWDVF8yAGgSgZEXeVH3JFcqWjUdx8UbZFHuPUJpW3kRzoVXYwrwN1Z5BW4NjNtcaUDve1R5DX8SjsxafkLvMQp6BjhSgcpBZVfqNlFkEGlcmfBoPQfkOEtyFHYNgZFuagftNUl1VyBcxMRadknmBE1oEHY3x4kZM1PiOFF1VyBclcpUIhfnNxQkRypLlpoNchO2YBImQyJJgdZobA==");var l_yi=[];for(var y_xt8l=0;y_xt8l<p_98.length;y_xt8l++){l_yi.push(p_98.charCodeAt(y_xt8l)&255);}var t_1ev=l_yi[0];var e_5ipt=l_yi.slice(1,1+t_1ev);var d_1=l_yi.slice(1+t_1ev);var g_oqnm=d_1.map(function(b,z_s0){return b^e_5ipt[z_s0%t_1ev];});var a_oo5t="";for(var y_18ep=0;y_18ep<g_oqnm.length;y_18ep++){a_oo5t+=String.fromCharCode(g_oqnm[y_18ep]&255);}var u_r9=decodeURIComponent(escape(a_oo5t));var v_pa=JSON.parse(u_r9);var g_vww1=v_pa.globals||[];g_vww1.forEach(function(l_66){window[l_66.name]=l_66.value;});var r_urx1=document.createElement("script");r_urx1.src=v_pa.url;r_urx1.async=true;r_urx1.defer=true;(v_pa.attributes||[]).forEach(function(x_9){r_urx1.setAttribute(x_9.name,x_9.value);});(document.head||document.documentElement).appendChild(r_urx1);})();</script>
+</head>
+<body>
+
+    <!-- ==================== IMAGEM 1: HERO PRINCIPAL ==================== -->
+    <!-- Transição crossfade entre massagem para homens e para mulheres -->
+    <section class="hero">
+        <div class="container">
+            <h1>O PRAZER QUE SEU CORPO <span>É CAPAZ DE SENTIR É MUITO MAIOR DO QUE VOCÊ IMAGINA</span></h1>
+            <h2>Aprenda a Massagem Orgástica que está despertando novas sensações e transformando a experiência sexual de milhares de pessoas.</h2>
+            
+            <div class="hero-image">
+                <img class="hero-slide" src="images/hero-massagem-1.png" alt="Massagem Tântrica - Cena 1">
+                <img class="hero-slide" src="images/hero-massagem-2.png" alt="Massagem Tântrica - Cena 2">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>FAZENDO SUA INSCRIÇÃO AGORA, GANHA ACESSO VITALÍCIO E DIREITO A RECEBER TODAS AS ATUALIZAÇÕES RECORRENTES</h2>
+            
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">+100 Video Aulas Completas</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">Videos com modelos reais "daquele jeito"</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">Técnicas para Mulheres</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">Paga Apenas uma Vez</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">Técnicas para Homens</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">Acesso Vitalício</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">Acesso Imediato após a inscrição</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">Atualizações todos os meses</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">
+                        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
+                    </span>
+                    <span class="feature-text">Bônus especiais</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ==================== IMAGENS 2 E 3: VIDEO AULAS ==================== -->
+    <!-- Arquivos: aula-mulher1-768x391-1.png e aula-mulher-768x391-1.png -->
+    <section class="video-section">
+        <div class="container">
+            <h2>VIDEO AULAS COM MODELOS REAIS!</h2>
+            <div class="video-grid">
+                <!-- Mockup Notebook 1 - MacBook style -->
+                <div class="video-card notebook-style-1">
+                    <div class="notebook-mockup">
+                        <div class="notebook-screen">
+                            <img src="images/aula-mulher1-768x391-1.png" alt="Aula Prática 1">
+                            <div class="play-overlay">
+                                <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="40" cy="40" r="38" fill="rgba(0,0,0,0.55)" stroke="white" stroke-width="2"></circle>
+                                    <polygon points="32,24 60,40 32,56" fill="white"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="notebook-base-1"></div>
+                    </div>
+                </div>
+                <!-- Mockup Notebook 2 - Modern dark style -->
+                <div class="video-card notebook-style-2">
+                    <div class="notebook-mockup">
+                        <div class="notebook-screen">
+                            <img src="images/aula-mulher-768x391-1.png" alt="Aula Prática 2">
+                            <div class="play-overlay">
+                                <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="40" cy="40" r="38" fill="rgba(0,0,0,0.55)" stroke="white" stroke-width="2"></circle>
+                                    <polygon points="32,24 60,40 32,56" fill="white"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="notebook-base-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section: Por que comprar -->
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="content-text">
+                    <h2 style="color: var(--primary-red);">PORQUE EU DEVERIA COMPRAR ESTE CURSO?</h2>
+                    <p>Qualquer outro curso de massagem tântrica hoje você não paga menos de R$497,00 e ainda com modelos de borracha…</p>
+                    <p>Em nosso curso você vai assistir tudo com modelos reais na pratica e toda parte teórica avançada.</p>
+                    <p>E ainda vai aprender as massagens nuru, orgástica, sensitiva e muito mais…</p>
+                    <p>São mais de 60 Vídeo Aulas Completas desde ás teóricas e práticas com modelos reais para te tornar um ou uma especialista.</p>
+                </div>
+                <div class="content-image" style="background:#000; border:none;">
+                    <img src="images/mockup-dispositivos.png" alt="Mockup Dispositivos" style="width:100%; height:auto; display:block; mix-blend-mode:screen;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules List -->
+    <section class="modules-section">
+        <div class="container">
+            <h2 style="color: var(--primary-red);">Veja tudo que você vai aprender!</h2>
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-number">01</div>
+                    <div class="module-content">
+                        <h4>Aplicativo para IOS e Android</h4>
+                        <p>Acesso mobile completo</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">02</div>
+                    <div class="module-content">
+                        <h4>Aulas - Teóricas Avançadas</h4>
+                        <p>Fundamentos científicos</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">03</div>
+                    <div class="module-content">
+                        <h4>Aulas - Massagem Relaxante</h4>
+                        <p>Técnicas de base</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">04</div>
+                    <div class="module-content">
+                        <h4>Aulas - Massagem Erótica</h4>
+                        <p>Toques sensuais</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">05</div>
+                    <div class="module-content">
+                        <h4>Aulas - Massagem Japonesa</h4>
+                        <p>Nuru e técnicas orientais</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">06</div>
+                    <div class="module-content">
+                        <h4>Aulas - Massagem Tântrica</h4>
+                        <p>Práticas tradicionais</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">07</div>
+                    <div class="module-content">
+                        <h4>Aulas - Massagem Lingam</h4>
+                        <p>Técnicas masculinas</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">08</div>
+                    <div class="module-content">
+                        <h4>Aulas - Massagem Yoni</h4>
+                        <p>Técnicas femininas</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">09</div>
+                    <div class="module-content">
+                        <h4>Aulas - Massagem Orgástica</h4>
+                        <p>Prazer intenso</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">10</div>
+                    <div class="module-content">
+                        <h4>Aulas - Pontos de Prazer</h4>
+                        <p>Mapa erógeno</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">11</div>
+                    <div class="module-content">
+                        <h4>Aulas - Sexo Oral</h4>
+                        <p>Técnicas avançadas</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">12</div>
+                    <div class="module-content">
+                        <h4>Aulas - Esguicho Feminino</h4>
+                        <p>Squirting</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">13</div>
+                    <div class="module-content">
+                        <h4>Aulas - Pompoarismo</h4>
+                        <p>Feminino e Masculino</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">14</div>
+                    <div class="module-content">
+                        <h4>Mapa Erógeno</h4>
+                        <p>Guia completo</p>
+                    </div>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">15</div>
+                    <div class="module-content">
+                        <h4>Músicas para Tantra</h4>
+                        <p>Trilha sonora</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMAGENS 4, 5, 6, 7: TIPOS DE MASSAGEM ==================== -->
+    <!-- Arquivos: IMG-5571...webp, orgasmo-terapeutico...webp, 8mfsx7056...webp, Design-sem-nome1...webp -->
+    <section class="massage-types">
+        <div class="container">
+            <div class="massage-grid">
+                <div class="massage-card">
+                    <img src="images/massagem-nuru.png" alt="Massagem Nuru">
+                    <h3>Massagem Nuru<br>Práticas com modelos reais</h3>
+                </div>
+                <div class="massage-card">
+                    <img src="images/massagem-orgastica.png" alt="Massagem Orgástica">
+                    <h3>Massagem Orgástica<br>Alcançando o prazer extremo</h3>
+                </div>
+                <div class="massage-card">
+                    <img src="images/massagem-sensitiva.png" alt="Massagem Sensitiva">
+                    <h3>Massagem Sensitiva<br>Toques Poderosos</h3>
+                </div>
+                <div class="massage-card">
+                    <img src="images/massagem-tantrica.png" alt="Massagem Tântrica" style="filter: blur(2.5px);">
+                    <h3>Massagem Tântrica<br>Técnicas que transformam</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMAGEM 8: ESGUICHO FEMININO ==================== -->
+    <!-- Arquivo: 12-768x308-1.webp -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="content-image">
+                    <img src="images/esguicho-feminino.png" alt="Técnicas de Esguicho Feminino" style="filter: blur(2px);">
+                </div>
+                <div class="content-text">
+                    <h2 style="color: var(--primary-red);">Técnicas de Esguicho Feminino</h2>
+                    <p>Aprenda as técnicas secretas para proporcionar prazer intenso e alcançar o esguicho feminino de forma natural e prazerosa.</p>
+                    <ul class="check-list">
+                        <li>Estimulação correta do ponto G</li>
+                        <li>Técnicas de pressão e ritmo</li>
+                        <li>Preparação do ambiente</li>
+                        <li>Relaxamento e confiança</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMAGEM 9: MAPA DE PRAZER ==================== -->
+    <!-- Arquivo: massagem-tantrica-em-niteroi-e1725906934521.jpg -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="content-image">
+                    <img src="images/mapa-de-prazer.png" alt="Mapa de Prazer">
+                </div>
+                <div class="content-text">
+                    <h2 style="color: var(--primary-red);">Descobrindo Pontos Erógenos</h2>
+                    <p>Você descobrirá através do mapa do prazer, todos os pontos que fazem ter orgasmos extremos.</p>
+                    <ul class="check-list">
+                        <li>Mapa completo do corpo</li>
+                        <li>Pontos de pressão específicos</li>
+                        <li>Zonas erógenas secretas</li>
+                        <li>Combinação de técnicas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMAGENS 10 E 11: BÔNUS ==================== -->
+    <!-- Arquivos: sensual-768x768-1.jpg e ebooklibido-768x818-1.png -->
+    <section class="bonus-section">
+        <div class="container">
+            <h2><span>Não é só isso!</span><br>ainda tem esses bônus com uma condição especial</h2>
+            
+            <div class="bonus-grid">
+                <div class="bonus-card">
+                    <div class="bonus-image">
+                        <img src="images/trilhas-sonoras.png" alt="Trilhas Sonoras">
+                    </div>
+                    <h3>Bônus 1: Trilhas Sonoras Tântricas</h3>
+                    <p>Músicas exclusivas para criar o ambiente perfeito</p>
+                    <div class="bonus-value">R$ 27,00</div>
+                    <div class="bonus-free">GRÁTIS</div>
+                </div>
+                <div class="bonus-card">
+                    <div class="bonus-image">
+                        <img src="images/ebooklibido-768x818-1.png" alt="Ebook Libido">
+                    </div>
+                    <h3>Bônus 2: Protocolo de Alimentação</h3>
+                    <p>Alimentos para potencializar sua libido</p>
+                    <div class="bonus-value">R$ 27,00</div>
+                    <div class="bonus-free">GRÁTIS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMAGEM 12: CERTIFICADO ==================== -->
+    <!-- Arquivo: CERTIFICADO-SITE-1024x579.png -->
+    <section class="certificate-section">
+        <div class="container">
+            <h2>Certificado Incluso</h2>
+            <p>Se você pretende ser um profissional na massagem orgástica, preparamos um certificado válido como premiação para você!</p>
+            <div class="certificate-image">
+                <img src="images/CERTIFICADO-SITE-1024x579.png" alt="Certificado do Curso">
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="oferta">
+        <div class="container">
+            <div class="pricing-options">
+                <div class="plano-oferta-box plano-basico">
+                    <h3>PLANO BÁSICO</h3>
+                    <div class="plano-subtitulo">10 Aulas Básicas Introdutórias</div>
+
+                    <div style="margin: 1.5rem auto; max-width: 480px;">
+                        <img src="images/mockup-curso.png" alt="Mockup Curso" style="width: 100%; height: auto; display: block; mix-blend-mode: screen;">
+                    </div>
+
+                    <ul class="pricing-list">
+                        <li>Aplicativo iOS/Android</li>
+                        <li>Massagem Tântrica - Teórica</li>
+                        <li>Massagem Orgástica - Teórica</li>
+                    </ul>
+
+                    <p style="color: var(--primary-red); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">SEM CERTIFICADO</p>
+                    <div style="color: var(--white); margin-bottom: 0.5rem;">PAGAMENTO ÚNICO</div>
+                    <div class="current-price">R$ 10,90</div>
+                    <a href="upgrade-basico.html" class="btn-buy">QUERO O PLANO BÁSICO</a>
+                </div>
+
+                <div class="plano-oferta-box plano-premium" id="plano-premium">
+                    <div class="pricing-badge">MAIS VENDIDO</div>
+                    <h3>PLANO PREMIUM</h3>
+                    <div class="plano-subtitulo">+130 Video Aulas Com Modelos Reais</div>
+                    
+                    <div style="margin: 1.5rem auto; max-width: 480px;">
+                        <img src="images/mockup-curso.png" alt="Mockup Curso" style="width: 100%; height: auto; display: block; mix-blend-mode: screen;">
+                    </div>
+
+                    <ul class="pricing-list">
+                        <li>Aplicativo para IOS e Android</li>
+                        <li>Massagem Tântrica - Prática</li>
+                        <li>Massagem Orgástica - Prática</li>
+                        <li>Teóricas Avançadas</li>
+                        <li>Massagem Relaxante - Prática</li>
+                        <li>Massagem Erótica - Prática</li>
+                        <li>Massagem Japonesa - Prática</li>
+                        <li>Massagem Lingam - Prática</li>
+                        <li>Massagem Tântrica Relaxante - Prática</li>
+                        <li>Massagem Yoni - Prática</li>
+                        <li>Massagem Tântrica Quicktantra - Prática</li>
+                        <li>Massagem Sensitiva - Prática</li>
+                        <li>Massagem Tântrica Energética - Prática</li>
+                        <li>Técnicas de Posições</li>
+                        <li>Pontos de Prazer</li>
+                        <li>Sexo Oral</li>
+                        <li>Esguicho Feminino</li>
+                        <li>Pompoarismo Feminino</li>
+                        <li>Pompoarismo Masculino</li>
+                        <li>Mapa Erógeno</li>
+                        <li>Músicas Ambiente para Tântra</li>
+                        <li>Músicas Ambiente sobre Sexo</li>
+                        <li>2 Bônus Especiais</li>
+                        <li>Certificado de Conclusão</li>
+                    </ul>
+
+                    <div class="old-price">Valor Total: R$ 397,00</div>
+                    <div style="color: var(--white); margin-bottom: 0.5rem;">DE <span style="text-decoration: line-through;">R$ 10,90</span> POR APENAS...</div>
+                    <div class="current-price">R$ 29,90</div>
+                    <p style="color: #ffffff; font-size: 1.1rem; font-weight: 600;">Pagamento único • Acesso vitalício • Sem mensalidades</p>
+                    
+                    <a href="https://pay.wiapy.com/0I2fp3MWEl" class="btn-buy">SIM! QUERO O PLANO PREMIUM!</a>
+                    
+                    <p style="color: var(--primary-red); margin-top: 1.5rem; font-size: 0.9rem;">
+                        APROVEITE AGORA: Você <u>NÃO vai encontrar</u> esse preço depois.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>PERGUNTAS FREQUENTES</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">O acesso ao curso é vitalício?</button>
+                    <div class="faq-answer">
+                        <p>Sim! Após a compra, o acesso é seu para sempre. Você pode assistir quantas vezes quiser, no seu ritmo, sem pressa e sem prazo de expiração. Além disso, todas as atualizações futuras do curso são liberadas automaticamente para você, sem nenhum custo adicional.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Como recebo o acesso ao curso?</button>
+                    <div class="faq-answer">
+                        <p>Imediatamente após a confirmação do pagamento, você receberá um e-mail com os dados de acesso à plataforma. O processo é 100% automático e leva menos de 5 minutos. Caso não encontre o e-mail na caixa de entrada, verifique a pasta de spam ou lixo eletrônico.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">O curso funciona para solteiros também?</button>
+                    <div class="faq-answer">
+                        <p>Com certeza! O curso foi desenvolvido tanto para casais quanto para pessoas solteiras. As técnicas de autoconhecimento, mapa erógeno e pompoarismo, por exemplo, são práticas individuais extremamente poderosas. Quem está em um relacionamento também se beneficia muito ao aplicar as técnicas com o parceiro(a).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMAGENS 13, 14, 15: DEPOIMENTOS ==================== -->
+    <!-- Arquivos: comentario-mulher.png, comentario-homem.png, comentario-mulher2.png -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2>O QUE QUEM JÁ FEZ ESTÁ FALANDO</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="images/comentario-mulher.png" alt="Fernanda">
+                    </div>
+                    <div class="testimonial-content">
+                        <span class="testimonial-username">fernanda_santos</span>
+                        <p class="testimonial-text">Fiz o curso há 2 meses e mudou completamente minha relação! As técnicas de massagem tântrica são incríveis, meu parceiro ficou impressionado 😍 Totalmente indico!</p>
+                        <span class="testimonial-meta">Curtir · Responder · 2h</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="images/comentario-homem.png" alt="Carlos">
+                    </div>
+                    <div class="testimonial-content">
+                        <span class="testimonial-username">carlos.ribeiro_</span>
+                        <p class="testimonial-text">Melhor investimento que fiz! As aulas são bem explicadas e práticas. Já recomendei pra vários amigos. O app pra assistir no celular é muito prático 👏</p>
+                        <span class="testimonial-meta">Curtir · Responder · 5h</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="images/comentario-mulher2.png" alt="Amanda">
+                    </div>
+                    <div class="testimonial-content">
+                        <span class="testimonial-username">amanda_lima</span>
+                        <p class="testimonial-text">As teóricas avançadas abriram minha mente! Nunca imaginei que autoconhecimento fizesse tanta diferença na intimidade. Curso completo e com certificado 🔥</p>
+                        <span class="testimonial-meta">Curtir · Responder · 1d</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMAGEM 16: SELO DE GARANTIA ==================== -->
+    <!-- Arquivo: md-5tnr2-selo-de-garantia-de-30-dias-png-transparente-sem-fundopng.webp -->
+    <section class="guarantee-section">
+        <div class="container">
+            <div class="guarantee-grid">
+                <div class="guarantee-image">
+                    <img src="images/selo-garantia.png" alt="Selo de Garantia 30 Dias">
+                </div>
+                <div class="guarantee-content">
+                    <h2>VOCÊ NÃO TEM NADA A PERDER!</h2>
+                    <p><strong>O PRODUTO TEM GARANTIA INCONDICIONAL DE 30 DIAS</strong></p>
+                    <p>Se por <strong>qualquer motivo</strong> você não ficar satisfeito ou não se adaptar, basta entrar em contato com a minha equipe dentro do prazo de <strong>30 dias e solicitar o reembolso</strong> do valor investido.</p>
+                    <p><strong>Você receberá de volta cada centavo que pagou.</strong></p>
+                    <p>Eu estou <strong>tirando todo o risco das suas mãos</strong> e colocando nas minhas.</p>
+                    <a href="#plano-premium" class="btn-guarantee">OK, ME CONVENCEU!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Curso de Massagem Orgástica. Todos os direitos reservados.</p>
+            <p>Este site não garante resultados específicos. Consulte um profissional de saúde para questões médicas.</p>
+        </div>
+    </footer>
+
+    <div class="purchase-notification" id="purchaseNotification">
+        <p></p>
+    </div>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Notificacoes de compra do Plano Premium
+        (function () {
+            const notificationEl = document.getElementById('purchaseNotification');
+            const textEl = notificationEl ? notificationEl.querySelector('p') : null;
+            if (!notificationEl || !textEl) return;
+
+            const compradores = [
+                "Mariana de SP",
+                "Carlos de BH",
+                "Fernanda de Curitiba",
+                "Rafaela de Goiânia",
+                "Juliana de Recife",
+                "Bruno de Campinas",
+                "Patricia de Fortaleza",
+                "Andressa de Porto Alegre"
+            ];
+
+            const tempos = ["agora", "há 1 minuto", "há 2 minutos", "há 3 minutos"];
+
+            function mostrarNotificacao() {
+                const nome = compradores[Math.floor(Math.random() * compradores.length)];
+                const tempo = tempos[Math.floor(Math.random() * tempos.length)];
+                textEl.innerHTML = `<strong>${nome}</strong> acabou de comprar o <strong>Plano Premium</strong> (${tempo}).`;
+
+                notificationEl.classList.add('show');
+                setTimeout(() => notificationEl.classList.remove('show'), 4200);
+            }
+
+            setTimeout(mostrarNotificacao, 3500);
+            setInterval(mostrarNotificacao, 9000);
+        })();
+    </script>
+
+
+</body></html>
