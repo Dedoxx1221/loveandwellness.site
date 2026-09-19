@@ -1,0 +1,712 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://wiapy.com/sell/1.0.0/sell.min.js"></script>
+  <title>Aulas práticas com modelos reais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#ef4444',
+            'gold-light': '#f87171',
+            'gold-dim': '#b91c1c',
+            violet: '#450a0a',
+            'violet-mid': '#7f1d1d',
+            'violet-light': '#dc2626',
+            dark: '#0a0a0a',
+            'dark-2': '#111111',
+            'dark-3': '#1a1a1a',
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(32px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            pulse_gold: {
+              '0%, 100%': { boxShadow: '0 0 0 0 rgba(239,68,68,0.45)' },
+              '50%': { boxShadow: '0 0 0 14px rgba(239,68,68,0)' },
+            },
+            pulse_lime: {
+              '0%, 100%': { boxShadow: '0 0 0 0 rgba(163,230,53,0.55)' },
+              '50%': { boxShadow: '0 0 0 14px rgba(163,230,53,0)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% center' },
+              '100%': { backgroundPosition: '200% center' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            secretIn: {
+              '0%': { opacity: '0', transform: 'translateY(18px) scale(0.96)' },
+              '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+            },
+          },
+          animation: {
+            fadeInUp: 'fadeInUp 0.7s ease forwards',
+            pulse_gold: 'pulse_gold 2s infinite',
+            pulse_lime: 'pulse_lime 2s infinite',
+            shimmer: 'shimmer 3s linear infinite',
+            float: 'float 3s ease-in-out infinite',
+            secretIn: 'secretIn 0.45s ease forwards',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background-color: #0a0a0a;
+      color: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.popup-open { overflow: hidden; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .gold-shimmer {
+      background: linear-gradient(90deg, #ef4444 0%, #fca5a5 30%, #ef4444 50%, #b91c1c 70%, #ef4444 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+
+    .cta-btn {
+      animation: pulse_gold 2s infinite;
+      background: linear-gradient(135deg, #ef4444 0%, #f87171 50%, #b91c1c 100%);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .cta-btn:hover { transform: scale(1.03); filter: brightness(1.1); }
+    .cta-btn:active { transform: scale(0.98); }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .countdown-block {
+      background: rgba(69, 10, 10, 0.45);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 12px;
+    }
+
+    .price-old { position: relative; color: #666; }
+    .price-old::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 2px;
+      background: #e53e3e;
+      transform: rotate(-5deg);
+    }
+
+    .gold-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ef4444, transparent);
+    }
+
+    .badge-float { animation: float 3s ease-in-out infinite; }
+
+    #secret-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    #secret-popup.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .secret-card {
+      width: min(540px, 100%);
+      max-height: min(96vh, 980px);
+      overflow-y: auto;
+      animation: secretIn 0.45s ease forwards;
+      background:
+        radial-gradient(ellipse at top, rgba(220,38,38,0.28), transparent 52%),
+        linear-gradient(180deg, #1a0508 0%, #0a0002 100%);
+      border: 1.5px solid #e11d2a;
+      border-radius: 28px;
+      box-shadow:
+        0 0 0 1px rgba(255,45,58,0.25) inset,
+        0 0 40px rgba(225,29,42,0.35),
+        0 24px 60px rgba(0,0,0,0.65);
+      padding: 18px 16px 14px;
+      text-align: center;
+    }
+    .popup-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #7f1d1d;
+      border: 1px solid #ef4444;
+      color: #fecaca;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 6px 12px;
+      margin-bottom: 12px;
+    }
+    .popup-badge span {
+      width: 16px; height: 16px;
+      border-radius: 999px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 11px;
+      line-height: 16px;
+      font-weight: 800;
+    }
+    .feat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin: 14px 0 12px;
+    }
+    .feat {
+      color: #e5e7eb;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.25;
+      padding: 10px 8px;
+      border: 1px solid rgba(239,68,68,0.35);
+      border-radius: 14px;
+      background: rgba(0,0,0,0.28);
+    }
+    .feat b { display: block; color: #ef4444; font-size: 20px; margin-bottom: 6px; }
+    .feat .red { color: #f87171; }
+    .vsl-wrap {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #000;
+      border: 1.5px solid #e11d2a;
+      aspect-ratio: 16 / 9;
+      max-height: 36vh;
+      margin: 0 auto 12px;
+      box-shadow: 0 0 24px rgba(225,29,42,0.25);
+    }
+    .vsl-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+      display: block;
+    }
+    .vsl-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(0,0,0,0.28);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .vsl-play i {
+      width: 58px; height: 58px;
+      border-radius: 999px;
+      background: #111;
+      border: 2px solid #ef4444;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-style: normal;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(225,29,42,0.45);
+    }
+    .vsl-play em {
+      position: absolute;
+      right: 14px;
+      bottom: 12px;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #e5e7eb;
+      text-shadow: 0 2px 8px #000;
+    }
+    .vsl-play.is-hidden { display: none; }
+    .hint-bar {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      text-align: left;
+      background: rgba(80,8,12,0.55);
+      border: 1px solid rgba(239,68,68,0.45);
+      border-radius: 16px;
+      padding: 12px 12px;
+      margin-top: 10px;
+    }
+    .hint-bar .clock {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 999px;
+      border: 2px solid #ef4444;
+      color: #fca5a5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+    #accept-offer {
+      display: block;
+      width: 100%;
+      background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+      color: #fff;
+      text-shadow: none;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(34,197,94,0.35);
+      animation: pulse_lime 2s infinite;
+    }
+    #accept-offer:hover { filter: brightness(1.08); }
+    #accept-offer .btn-sub { color: #bbf7d0; }
+    .speed-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+    .speed-btn {
+      min-width: 52px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(239,68,68,0.35);
+      background: rgba(255,255,255,0.04);
+      color: #d1d5db;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .speed-btn.is-on {
+      background: #ef4444;
+      border-color: #ef4444;
+      color: #fff;
+    }
+    .quality-toggle {
+      margin: 0 auto 8px;
+      background: transparent;
+      border: 0;
+      color: #6b7280;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .quality-bar {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 10px;
+      flex-wrap: wrap;
+    }
+    .quality-bar.is-open { display: flex; }
+    .quality-bar label {
+      color: #9ca3af;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .secret-seal {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 30%, #7f1d1d, #450a0a);
+      border: 1px solid rgba(239, 68, 68, 0.55);
+      box-shadow: 0 0 24px rgba(239, 68, 68, 0.35);
+      font-size: 26px;
+    }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden popup-open">
+
+  <div id="secret-popup" role="dialog" aria-modal="true" aria-labelledby="secret-title">
+    <div class="secret-card">
+      <div class="popup-badge"><span>!</span> Pare. Não saia ainda.</div>
+      <h2 id="secret-title" class="font-serif text-[26px] md:text-[32px] font-bold text-white leading-[1.05] mb-1">
+        Você escolheu apenas o<br><span style="color:#ef4444;">plano teórico.</span>
+      </h2>
+      <p class="text-gray-200 text-base md:text-lg font-medium mb-1">Quer adicionar as aulas práticas?</p>
+
+      <div class="feat-row">
+        <div class="feat"><b>📖</b> Aulas práticas<br>com modelos reais</div>
+        <div class="feat"><b>👑</b> Conteúdo completo<br>e avançado</div>
+        <div class="feat"><b>🔥</b> Acesso às técnicas<br>que você não verá no plano teórico</div>
+      </div>
+
+      <div class="vsl-wrap">
+        <video id="vsl" playsinline="" webkit-playsinline="" preload="auto" poster="images/vsl-poster.jpg" src="media/vsl-280.mp4"></video>
+        <button type="button" id="vsl-play" class="vsl-play" aria-label="Reproduzir vídeo">
+          <i>▶</i><em>Assista<br>e descubra</em>
+        </button>
+      </div>
+
+      <div class="speed-bar" role="group" aria-label="Velocidade do vídeo">
+        <button type="button" class="speed-btn is-on" data-speed="1">1x</button>
+        <button type="button" class="speed-btn" data-speed="1.5">1,5x</button>
+        <button type="button" class="speed-btn" data-speed="2">2x</button>
+      </div>
+      <button type="button" id="quality-toggle" class="quality-toggle">Qualidade do vídeo</button>
+      <div class="quality-bar" id="quality-bar" role="group" aria-label="Qualidade do vídeo">
+        <button type="button" class="speed-btn" data-quality="144" data-src="./assets/vsl-144.mp4">144p</button>
+        <button type="button" class="speed-btn is-on" data-quality="280" data-src="./assets/vsl-280.mp4">280p</button>
+        <button type="button" class="speed-btn" data-quality="480" data-src="./assets/vsl-480.mp4">480p</button>
+        <button type="button" class="speed-btn" data-quality="1080" data-src="./assets/vsl-480.mp4">1080p</button>
+      </div>
+
+     <div id="wiapy_upsell"></div>
+<script>
+initWiapyUpsell({
+    linkUrl: "https://pay.wiapy.com/checkout/6aae00465c2bd84427bfb5f0",
+    linkText: "🔒 Quero liberar as aulas práticas →",
+    styles: {
+        backgroundColor: "#00d769",
+        hoverBackgroundColor: "#00b85a",
+        fontSize: "17px",
+        borderRadius: "10px"
+    },
+    refusalLinkUrl: "https://wiapy.com/login",
+    refusalLinkText: "Vou ficar de fora",
+    refusalLinkColor: "#FFFFFF"
+});
+</script>
+        🔒 Quero liberar as aulas práticas →
+        <div class="btn-sub text-sm font-normal normal-case tracking-normal mt-1">
+          R$ 19,90 · acesso liberado na hora
+        </div>
+      </a>
+
+      <div class="hint-bar">
+        <div class="clock">⏱</div>
+        <p id="offer-hint" class="text-white text-xs leading-relaxed font-medium m-0">
+          Oferta disponível apenas nesta página por <span style="color:#ef4444;">R$ 19,90.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="orb w-96 h-96 bg-violet-mid opacity-20 -top-20 -left-20"></div>
+    <div class="orb w-80 h-80 bg-gold opacity-10 top-1/3 -right-20"></div>
+    <div class="orb w-64 h-64 bg-violet-light opacity-15 bottom-1/4 left-1/4"></div>
+  </div>
+
+  <div class="relative z-10 w-full px-5 py-3 text-center" style="background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(239,68,68,0.18);">
+    <p class="text-gray-400 text-xs md:text-sm leading-relaxed">
+      Básico teórico liberado · o link chega no <strong class="text-gray-200">e-mail</strong>.
+      Abaixo é o prático que ficou de fora.
+    </p>
+  </div>
+
+  <div class="relative z-10 max-w-2xl mx-auto px-4 py-6">
+
+    <div class="reveal text-center mb-8">
+      <div class="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/50 rounded-full px-4 py-1.5 mb-5">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse inline-block"></span>
+        <span class="text-red-400 text-xs font-semibold uppercase tracking-widest">Só quem pegou o Básico</span>
+      </div>
+
+      <h1 class="font-serif text-3xl md:text-[42px] font-bold leading-tight mb-4">
+        <span class="text-white">Você aderiu só o Básico teórico.</span><br>
+        <span class="gold-shimmer">Você vai perder o melhor.</span>
+      </h1>
+
+      <p class="text-gray-300 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
+        O Básico entrega a teoria. O que o anúncio mostrou —
+        <strong class="text-white">aulas práticas com modelos reais</strong> —
+        não vai junto. Abre agora ou fica só no caderno.
+      </p>
+    </div>
+
+    <div class="reveal mb-8">
+      <div class="glass rounded-3xl p-7 md:p-8 text-center" style="border-color: rgba(239,68,68,0.4); background: rgba(127,29,29,0.14);">
+        <p class="text-gold text-xs uppercase tracking-[0.22em] mb-3">O que o Básico não tem</p>
+        <h2 class="font-serif text-2xl md:text-3xl font-semibold text-white leading-tight mb-4">
+          Aulas práticas com modelos reais.
+        </h2>
+        <p class="text-gray-300 text-sm leading-relaxed max-w-md mx-auto">
+          Tântrica, orgástica, yoni, lingam — o toque na pele, no corpo,
+          do jeito que o anúncio prometeu e o plano de R$ 10,90 não entregou.
+        </p>
+      </div>
+    </div>
+
+    <div class="gold-line mb-8 reveal"></div>
+
+    <div class="reveal text-center mb-10">
+      <p class="text-gray-400 text-sm uppercase tracking-widest mb-3">Essa condição some em</p>
+      <div class="flex justify-center gap-3">
+        <div class="countdown-block px-4 py-3 text-center min-w-[64px]">
+          <div id="minutes" class="font-serif text-3xl font-bold text-gold leading-none">10</div>
+          <div class="text-gray-500 text-xs mt-1">min</div>
+        </div>
+        <div class="text-gold text-3xl font-bold self-center">:</div>
+        <div class="countdown-block px-4 py-3 text-center min-w-[64px]">
+          <div id="seconds" class="font-serif text-3xl font-bold text-gold leading-none">00</div>
+          <div class="text-gray-500 text-xs mt-1">seg</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal mb-4">
+      <h2 class="font-serif text-2xl md:text-3xl text-center font-semibold mb-2">
+        O que o teórico <span class="text-gold">não mostra</span>
+      </h2>
+      <p class="text-gray-400 text-sm text-center mb-8">O Básico explica. O prático demonstra no corpo.</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 mb-10">
+      <div class="glass rounded-2xl p-5 reveal reveal-delay-1" style="border-color: rgba(239,68,68,0.45); background: rgba(127,29,29,0.14);">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-gold uppercase tracking-widest">O que você leva</span>
+          <span class="text-xs bg-gold/20 text-gold border border-gold/40 rounded-full px-2 py-0.5">Prático</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-white mb-2">Aulas com modelos reais</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          O passo a passo filmado. Mão, pressão, ritmo — não é slide, é o corpo na frente da câmera.
+        </p>
+      </div>
+
+      <div class="glass rounded-2xl p-5 reveal reveal-delay-2">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-gold uppercase tracking-widest">Junto</span>
+          <span class="text-xs bg-white/10 text-gray-200 border border-white/15 rounded-full px-2 py-0.5">Pra sempre</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-white mb-2">Acesso vitalício ao prático</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Mesma área de membros do Básico. Paga uma vez. As aulas práticas ficam liberadas.
+        </p>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-5 mb-10 reveal">
+      <h3 class="font-serif text-xl text-white mb-3">Se você sair agora</h3>
+      <p class="text-gray-400 text-sm leading-relaxed">
+        Fica só com as 10 aulas teóricas. Sem modelo, sem demonstração, sem o que o anúncio mostrou.
+        Essa página não volta no site.
+      </p>
+    </div>
+
+    <div class="reveal text-center mb-10">
+      <div class="glass rounded-3xl p-8 relative overflow-hidden" style="border-color: rgba(239,68,68,0.5);">
+        <div class="absolute inset-0 opacity-10" style="background: radial-gradient(ellipse at center, #ef4444 0%, transparent 70%);"></div>
+
+        <div class="badge-float inline-block mb-5">
+          <span class="bg-red-600 text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+            Só pra quem pegou o Básico
+          </span>
+        </div>
+
+        <p class="text-gray-400 text-sm uppercase tracking-widest mb-2">Aulas práticas + vitalício</p>
+
+        <div class="price-old font-serif text-3xl font-bold mb-1 inline-block">
+          R$ 67,00
+        </div>
+
+        <p class="text-gray-500 text-xs mb-4">↓ nesta página, uma vez</p>
+
+        <div class="mb-2">
+          <span class="text-gray-300 text-lg">por</span>
+        </div>
+        <div class="font-serif leading-none mb-3">
+          <span class="text-gold text-lg">R$</span>
+          <span class="font-bold text-lime-400" style="font-size: clamp(3.5rem, 14vw, 5rem); text-shadow: 0 0 20px rgba(163, 230, 53, 0.45);">19</span>
+          <span class="text-lime-400 text-3xl font-bold" style="text-shadow: 0 0 20px rgba(163, 230, 53, 0.45);">,90</span>
+        </div>
+
+        <p class="text-gray-500 text-sm">
+          Uma parcela · mesmo login · acesso que não vence
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal text-center mb-6">
+      <a href="https://pay.wiapy.com/checkout/69e911e75d57050571aaa42b" target="_blank" rel="noopener noreferrer" class="cta-btn w-full max-w-md mx-auto block text-white font-bold rounded-2xl py-5 px-6 text-lg md:text-xl uppercase tracking-wide leading-snug shadow-2xl">
+        🔒 Quero liberar as aulas práticas →
+        <div class="btn-sub text-sm font-normal normal-case tracking-normal mt-1">
+          R$ 19,90 · acesso liberado na hora
+        </div>
+      </a>
+
+      <div class="flex items-center justify-center gap-6 mt-5 text-gray-500 text-xs">
+        <div class="flex items-center gap-1.5"><span>🔒</span><span>Pagamento seguro</span></div>
+        <div class="flex items-center gap-1.5"><span>⚡</span><span>Acesso imediato</span></div>
+        <div class="flex items-center gap-1.5"><span>🛡️</span><span>7 dias de garantia</span></div>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-5 mb-8 reveal">
+      <h3 class="font-serif text-xl text-white mb-4">Antes de sair</h3>
+      <div class="space-y-3">
+        <details class="bg-white/5 border border-white/10 rounded-xl p-3">
+          <summary class="text-gray-200 text-sm cursor-pointer">O Básico já não tem aula prática?</summary>
+          <p class="text-gray-400 text-sm mt-2">Não. O Básico é teórico — 10 aulas. Prático com modelo real só entra aqui.</p>
+        </details>
+        <details class="bg-white/5 border border-white/10 rounded-xl p-3">
+          <summary class="text-gray-200 text-sm cursor-pointer">Isso é o Plano Premium de R$ 29,90?</summary>
+          <p class="text-gray-400 text-sm mt-2">É o prático que o Premium leva. Nesta página sai por R$ 19,90, uma vez, pra quem já pagou o Básico.</p>
+        </details>
+        <details class="bg-white/5 border border-white/10 rounded-xl p-3">
+          <summary class="text-gray-200 text-sm cursor-pointer">Vitalício é mensalidade?</summary>
+          <p class="text-gray-400 text-sm mt-2">Não. R$ 19,90 uma vez. Não renova sozinho.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="reveal text-center pb-10">
+      <a href="#" class="text-gray-600 text-xs underline underline-offset-4 hover:text-gray-500 transition-colors leading-relaxed">
+        Continuar só com o Básico teórico
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    const popup = document.getElementById('secret-popup');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    const video = document.getElementById('vsl');
+    const playBtn = document.getElementById('vsl-play');
+    let total = 10 * 60;
+    let ticking = false;
+
+    const startCountdown = () => {
+      if (ticking) return;
+      ticking = true;
+      const tick = () => {
+        if (total <= 0) {
+          minutesEl.textContent = '00';
+          secondsEl.textContent = '00';
+          return;
+        }
+        total--;
+        minutesEl.textContent = String(Math.floor(total / 60)).padStart(2, '0');
+        secondsEl.textContent = String(total % 60).padStart(2, '0');
+      };
+      setInterval(tick, 1000);
+    };
+    startCountdown();
+
+    playBtn.addEventListener('click', async () => {
+      try {
+        video.muted = false;
+        await video.play();
+        playBtn.classList.add('is-hidden');
+      } catch (err) {
+        video.muted = true;
+        await video.play();
+        playBtn.textContent = 'Toque de novo para ouvir';
+      }
+    });
+
+    video.addEventListener('play', () => playBtn.classList.add('is-hidden'));
+    video.addEventListener('pause', () => {
+      if (!video.ended) playBtn.classList.remove('is-hidden');
+    });
+
+    document.querySelectorAll('.speed-btn[data-speed]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const rate = parseFloat(btn.dataset.speed);
+        video.playbackRate = rate;
+        document.querySelectorAll('.speed-btn[data-speed]').forEach((b) => b.classList.remove('is-on'));
+        btn.classList.add('is-on');
+      });
+    });
+
+    const qualityToggle = document.getElementById('quality-toggle');
+    const qualityBar = document.getElementById('quality-bar');
+    if (qualityToggle && qualityBar) {
+      qualityToggle.addEventListener('click', () => {
+        qualityBar.classList.toggle('is-open');
+        qualityToggle.textContent = qualityBar.classList.contains('is-open')
+          ? 'Ocultar qualidade'
+          : 'Qualidade do vídeo';
+      });
+    }
+
+    document.querySelectorAll('.speed-btn[data-quality]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('is-on')) return;
+        const t = video.currentTime;
+        const rate = video.playbackRate;
+        const wasPlaying = !video.paused;
+        document.querySelectorAll('.speed-btn[data-quality]').forEach((b) => b.classList.remove('is-on'));
+        btn.classList.add('is-on');
+        video.src = btn.dataset.src;
+        video.addEventListener('loadedmetadata', function onReady() {
+          video.removeEventListener('loadedmetadata', onReady);
+          video.currentTime = t;
+          video.playbackRate = rate;
+          if (wasPlaying) video.play().catch(() => {});
+        });
+        video.load();
+      });
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+
+</body></html>

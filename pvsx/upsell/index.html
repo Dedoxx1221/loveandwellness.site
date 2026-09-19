@@ -1,0 +1,542 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://wiapy.com/sell/1.0.0/sell.min.js"></script>
+  <title>Uma coisa que o checkout não mostrou</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#ef4444',
+            'gold-light': '#f87171',
+            'gold-dim': '#b91c1c',
+            violet: '#450a0a',
+            'violet-mid': '#7f1d1d',
+            'violet-light': '#dc2626',
+            dark: '#0a0a0a',
+            'dark-2': '#111111',
+            'dark-3': '#1a1a1a',
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(32px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            pulse_gold: {
+              '0%, 100%': { boxShadow: '0 0 0 0 rgba(239,68,68,0.45)' },
+              '50%': { boxShadow: '0 0 0 14px rgba(239,68,68,0)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% center' },
+              '100%': { backgroundPosition: '200% center' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            secretIn: {
+              '0%': { opacity: '0', transform: 'translateY(18px) scale(0.96)' },
+              '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+            },
+          },
+          animation: {
+            fadeInUp: 'fadeInUp 0.7s ease forwards',
+            pulse_gold: 'pulse_gold 2s infinite',
+            shimmer: 'shimmer 3s linear infinite',
+            float: 'float 3s ease-in-out infinite',
+            secretIn: 'secretIn 0.45s ease forwards',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background-color: #0a0a0a;
+      color: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.popup-open { overflow: hidden; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    .glass:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(212, 175, 55, 0.35);
+      transform: translateY(-4px);
+    }
+
+    .gold-shimmer {
+      background: linear-gradient(90deg, #ef4444 0%, #fca5a5 30%, #ef4444 50%, #b91c1c 70%, #ef4444 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+
+    .cta-btn {
+      animation: pulse_gold 2s infinite;
+      background: linear-gradient(135deg, #ef4444 0%, #f87171 50%, #b91c1c 100%);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .cta-btn:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
+    .cta-btn:active { transform: scale(0.98); }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .countdown-block {
+      background: rgba(69, 10, 10, 0.45);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 12px;
+    }
+
+    .price-old { position: relative; color: #666; }
+    .price-old::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 2px;
+      background: #e53e3e;
+      transform: rotate(-5deg);
+    }
+
+    .gold-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ef4444, transparent);
+    }
+
+    .badge-float { animation: float 3s ease-in-out infinite; }
+
+    .module-media {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(239, 68, 68, 0.28);
+      display: block;
+    }
+
+    .module-overlay {
+      background: linear-gradient(180deg, rgba(10, 10, 10, 0.1) 20%, rgba(10, 10, 10, 0.85) 100%);
+    }
+
+    #secret-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(4, 0, 0, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    #secret-popup.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .secret-card {
+      width: min(440px, 100%);
+      animation: secretIn 0.45s ease forwards;
+      background: linear-gradient(180deg, #1a0b0b 0%, #0d0707 100%);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      padding: 28px 24px 22px;
+      text-align: center;
+    }
+    .secret-seal {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 30%, #7f1d1d, #450a0a);
+      border: 1px solid rgba(239, 68, 68, 0.55);
+      box-shadow: 0 0 24px rgba(239, 68, 68, 0.35);
+      font-size: 26px;
+    }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden popup-open">
+
+  <!-- POPUP DO SEGREDO -->
+  <div id="secret-popup" role="dialog" aria-modal="true" aria-labelledby="secret-title">
+    <div class="secret-card">
+      <div class="secret-seal">🔒</div>
+      <p class="text-gold text-[11px] font-semibold uppercase tracking-[0.22em] mb-3">Não estava no checkout</p>
+      <h2 id="secret-title" class="font-serif text-[26px] md:text-3xl font-bold text-white leading-tight mb-3">
+        Tem um segredo<br>depois da sua compra.
+      </h2>
+      <p class="text-gray-300 text-sm leading-relaxed mb-6">
+        No pagamento os módulos aparecem <strong class="text-white">um por um</strong>.
+        Existe um pack completo — os três juntos + o Segredo Final — que só abre agora.
+      </p>
+      <button type="button" id="reveal-secret" class="cta-btn w-full text-white font-bold rounded-2xl py-4 px-5 text-base uppercase tracking-wide">
+        Revelar o segredo
+      </button>
+      <p class="text-gray-500 text-xs mt-4 leading-relaxed">
+        Seu curso já está confirmado. O acesso vai no e-mail.<br>
+        Isso aqui é extra — e some se você sair.
+      </p>
+    </div>
+  </div>
+
+  <!-- Background orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="orb w-96 h-96 bg-violet-mid opacity-20 -top-20 -left-20"></div>
+    <div class="orb w-80 h-80 bg-gold opacity-10 top-1/3 -right-20"></div>
+    <div class="orb w-64 h-64 bg-violet-light opacity-15 bottom-1/4 left-1/4"></div>
+  </div>
+
+  <!-- Faixa discreta: curso já liberado, sem cara de recibo -->
+  <div class="relative z-10 w-full px-5 py-3 text-center" style="background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(239,68,68,0.18);">
+    <p class="text-gray-400 text-xs md:text-sm leading-relaxed">
+      Curso liberado · o link de acesso chega no <strong class="text-gray-200">e-mail</strong> (olha o spam).
+      Abaixo é uma condição que o checkout não mostrou.
+    </p>
+  </div>
+
+  <div class="relative z-10 max-w-2xl mx-auto px-4 py-6">
+
+    <div class="reveal text-center mb-8">
+      <div class="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/50 rounded-full px-4 py-1.5 mb-5">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse inline-block"></span>
+        <span class="text-red-400 text-xs font-semibold uppercase tracking-widest">Só nesta página</span>
+      </div>
+
+      <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-4">
+        <span class="text-white">O checkout escondeu</span><br>
+        <span class="gold-shimmer">o pack completo.</span>
+      </h1>
+
+      <p class="text-gray-300 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
+        Lá fora cada módulo saía separado.
+        Aqui os três entram juntos — e ainda leva
+        <strong class="text-gold">O Segredo Final</strong> —
+        por um preço que não volta no site.
+      </p>
+    </div>
+
+    <div class="reveal mb-8">
+      <div class="glass rounded-3xl overflow-hidden relative">
+        <img src="images/combo-supremo-geral.png" alt="Capa do pack com os módulos juntos" class="w-full h-auto object-cover">
+        <div class="absolute inset-0 module-overlay"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5">
+          <p class="text-gold text-xs uppercase tracking-[0.22em] mb-2">Pack reservado</p>
+          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-white leading-tight">
+            Posições, oral, toques e o protocolo que fecha a prática.
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-line mb-8 reveal"></div>
+
+    <div class="reveal text-center mb-10">
+      <p class="text-gray-400 text-sm uppercase tracking-widest mb-3">Essa condição some em</p>
+      <div class="flex justify-center gap-3">
+        <div class="countdown-block px-4 py-3 text-center min-w-[64px]">
+          <div id="minutes" class="font-serif text-3xl font-bold text-gold leading-none">10</div>
+          <div class="text-gray-500 text-xs mt-1">min</div>
+        </div>
+        <div class="text-gold text-3xl font-bold self-center">:</div>
+        <div class="countdown-block px-4 py-3 text-center min-w-[64px]">
+          <div id="seconds" class="font-serif text-3xl font-bold text-gold leading-none">00</div>
+          <div class="text-gray-500 text-xs mt-1">seg</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal mb-4">
+      <h2 class="font-serif text-2xl md:text-3xl text-center font-semibold mb-2">
+        O que entra no <span class="text-gold">pack</span>
+      </h2>
+      <p class="text-gray-400 text-sm text-center mb-8">Três módulos do curso + o extra que não aparece no checkout</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 mb-10">
+      <div class="glass rounded-2xl p-4 transition-all duration-300 reveal reveal-delay-1">
+        <img src="images/modulo-biblia-posicoes.png" alt="Módulo Bíblia das Posições" class="module-media mb-4" style="aspect-ratio: 1 / 1;">
+        <div class="flex items-center justify-between gap-3 mb-1">
+          <span class="text-xs font-semibold text-gold uppercase tracking-widest">Módulo 01</span>
+          <span class="text-xs text-gray-500">Geometria do prazer</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-white mb-2">Bíblia das Posições</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Um roteiro visual pra variar o ângulo sem perder o ritmo — e parar de repetir a mesma noite.
+        </p>
+      </div>
+
+      <div class="glass rounded-2xl p-4 transition-all duration-300 reveal reveal-delay-2">
+        <img src="images/modulo-sexo-oral-perfeito.png" alt="Módulo Sexo Oral Perfeito" class="module-media mb-4" style="aspect-ratio: 819 / 1024;">
+        <div class="flex items-center justify-between gap-3 mb-1">
+          <span class="text-xs font-semibold text-violet-light uppercase tracking-widest">Módulo 02</span>
+          <span class="text-xs text-gray-500">Técnicas avançadas</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-white mb-2">Sexo Oral Perfeito</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Ritmo, pressão e pausa. O tipo de técnica que o curso de massagem começa e este módulo termina.
+        </p>
+      </div>
+
+      <div class="glass rounded-2xl p-4 transition-all duration-300 reveal reveal-delay-3">
+        <img src="images/modulo-toques-proibidos.png" alt="Módulo Toques Proibidos" class="module-media mb-4" style="aspect-ratio: 819 / 1024;">
+        <div class="flex items-center justify-between gap-3 mb-1">
+          <span class="text-xs font-semibold text-gold uppercase tracking-widest">Módulo 03</span>
+          <span class="text-xs text-gray-500">Pontos de energia</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-white mb-2">Toques Proibidos</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Os pontos que o básico não ensina. Pra usar hoje, em cima do que você acabou de comprar.
+        </p>
+      </div>
+
+      <div class="glass rounded-2xl p-5 transition-all duration-300 reveal reveal-delay-4" style="border-color: rgba(239,68,68,0.45); background: rgba(127,29,29,0.14);">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-gold uppercase tracking-widest">Só neste pack</span>
+          <span class="text-xs bg-gold/20 text-gold border border-gold/40 rounded-full px-2 py-0.5">O Segredo</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-white mb-2">O Segredo Final</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-3">
+          O protocolo que junta massagem + os três módulos numa sequência só. Sem isso, vira aula solta.
+        </p>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="bg-white/5 border border-white/10 rounded-lg p-2 text-gray-300">Mesma área de membros</div>
+          <div class="bg-white/5 border border-white/10 rounded-lg p-2 text-gray-300">Pagamento único</div>
+          <div class="bg-white/5 border border-white/10 rounded-lg p-2 text-gray-300">Acesso na hora</div>
+          <div class="bg-white/5 border border-white/10 rounded-lg p-2 text-gray-300">Sem mensalidade</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-5 mb-10 reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex -space-x-2">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-mid to-violet-light border-2 border-dark flex items-center justify-center text-xs font-bold">A</div>
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold-dim to-gold border-2 border-dark flex items-center justify-center text-xs font-bold">M</div>
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-800 to-pink-500 border-2 border-dark flex items-center justify-center text-xs font-bold">C</div>
+        </div>
+        <p class="text-gray-400 text-sm">Quem leva o pack costuma usar na <strong class="text-white">primeira semana</strong> do curso</p>
+      </div>
+      <div class="flex gap-1 mb-2">
+        <span class="text-gold text-lg">★★★★★</span>
+      </div>
+      <p class="text-gray-300 text-sm italic leading-relaxed">
+        "O curso ensinou o toque. O pack ensinou o que fazer com o toque. Toques Proibidos sozinho já pagou o valor."
+      </p>
+      <p class="text-gray-500 text-xs mt-2">— Aluna do curso · São Paulo</p>
+    </div>
+
+    <div class="glass rounded-2xl p-5 mb-10 reveal">
+      <h3 class="font-serif text-2xl text-white mb-4">Se fosse comprar separado</h3>
+      <div class="space-y-3">
+        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+          <span class="text-gray-300 text-sm">Bíblia das Posições</span>
+          <span class="text-gold font-semibold">R$ 37,00</span>
+        </div>
+        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+          <span class="text-gray-300 text-sm">Sexo Oral Perfeito</span>
+          <span class="text-gold font-semibold">R$ 27,00</span>
+        </div>
+        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+          <span class="text-gray-300 text-sm">Toques Proibidos</span>
+          <span class="text-gold font-semibold">R$ 21,00</span>
+        </div>
+        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+          <span class="text-gray-300 text-sm">O Segredo Final</span>
+          <span class="text-gold font-semibold">R$ 12,00</span>
+        </div>
+        <div class="flex items-center justify-between pt-2">
+          <span class="text-white font-semibold">Valor se fosse avulso</span>
+          <span class="text-white font-bold text-lg">R$ 97,00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal text-center mb-10">
+      <div class="glass rounded-3xl p-8 relative overflow-hidden" style="border-color: rgba(239,68,68,0.5);">
+        <div class="absolute inset-0 opacity-10" style="background: radial-gradient(ellipse at center, #ef4444 0%, transparent 70%);"></div>
+
+        <div class="badge-float inline-block mb-5">
+          <span class="bg-red-600 text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+            Só pra quem acabou de entrar
+          </span>
+        </div>
+
+        <p class="text-gray-400 text-sm uppercase tracking-widest mb-2">Os quatro juntos saem por</p>
+
+        <div class="price-old font-serif text-3xl font-bold mb-1 inline-block">
+          R$ 97,00
+        </div>
+
+        <p class="text-gray-500 text-xs mb-4">↓ nesta página, uma vez</p>
+
+        <div class="mb-2">
+          <span class="text-gray-300 text-lg">por</span>
+        </div>
+        <div class="font-serif leading-none mb-3">
+          <span class="text-gold text-lg">R$</span>
+          <span class="font-bold text-lime-400" style="font-size: clamp(3.5rem, 14vw, 5rem); text-shadow: 0 0 20px rgba(163, 230, 53, 0.45);">14</span>
+          <span class="text-lime-400 text-3xl font-bold" style="text-shadow: 0 0 20px rgba(163, 230, 53, 0.45);">,90</span>
+        </div>
+
+        <p class="text-gray-500 text-sm">
+          Uma parcela · mesmo login do curso · sem assinatura
+        </p>
+
+        <div class="mt-4 inline-flex items-center gap-2 bg-lime-900/25 border border-lime-400/40 rounded-full px-4 py-2">
+          <span class="text-lime-300 text-sm font-semibold">R$ 82 a menos do que levar avulso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal text-center mb-6">
+     <div id="wiapy_upsell"></div>
+<script>
+initWiapyUpsell({
+    linkUrl: "https://pay.wiapy.com/checkout/6aadff4fcf13c78c723d5670",
+    linkText: "QUERO O PACK AGORA",
+    styles: {
+        backgroundColor: "#00d769",
+        hoverBackgroundColor: "#00b85a",
+        fontSize: "17px",
+        borderRadius: "10px"
+    },
+    refusalLinkUrl: "https://wiapy.com/login",
+    refusalLinkText: "Não quero ter os beneficios",
+    refusalLinkColor: "#FFFFFF"
+});
+</script>
+        <div class="text-sm font-normal normal-case tracking-normal mt-1 opacity-80">
+          R$ 14,90 · libera na hora na área de membros
+        </div>
+      </a>
+
+      <div class="flex items-center justify-center gap-6 mt-5 text-gray-500 text-xs">
+        <div class="flex items-center gap-1.5">
+          <span>🔒</span>
+          <span>Pagamento seguro</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span>⚡</span>
+          <span>Acesso imediato</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span>🛡️</span>
+          <span>7 dias de garantia</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-5 mb-8 reveal">
+      <h3 class="font-serif text-xl text-white mb-4">Antes de sair</h3>
+      <div class="space-y-3">
+        <details class="bg-white/5 border border-white/10 rounded-xl p-3">
+          <summary class="text-gray-200 text-sm cursor-pointer">Vou receber onde?</summary>
+          <p class="text-gray-400 text-sm mt-2">Na mesma área de membros do curso. Não cria outra conta.</p>
+        </details>
+        <details class="bg-white/5 border border-white/10 rounded-xl p-3">
+          <summary class="text-gray-200 text-sm cursor-pointer">É mensalidade?</summary>
+          <p class="text-gray-400 text-sm mt-2">Não. R$ 14,90 uma vez. Sem renovação.</p>
+        </details>
+        <details class="bg-white/5 border border-white/10 rounded-xl p-3">
+          <summary class="text-gray-200 text-sm cursor-pointer">Por que isso não estava no checkout?</summary>
+          <p class="text-gray-400 text-sm mt-2">Lá os módulos vão avulsos. O pack com o Segredo Final só abre depois da compra — e não fica no site.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="reveal text-center pb-10">
+      <a href="#" class="text-gray-600 text-xs underline underline-offset-4 hover:text-gray-500 transition-colors leading-relaxed">
+        Seguir só com o curso, sem o pack
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    const popup = document.getElementById('secret-popup');
+    const revealBtn = document.getElementById('reveal-secret');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    let total = 10 * 60;
+    let ticking = false;
+
+    const startCountdown = () => {
+      if (ticking) return;
+      ticking = true;
+      const tick = () => {
+        if (total <= 0) {
+          minutesEl.textContent = '00';
+          secondsEl.textContent = '00';
+          return;
+        }
+        total--;
+        minutesEl.textContent = String(Math.floor(total / 60)).padStart(2, '0');
+        secondsEl.textContent = String(total % 60).padStart(2, '0');
+      };
+      setInterval(tick, 1000);
+    };
+
+    const closePopup = () => {
+      popup.classList.add('is-hidden');
+      document.body.classList.remove('popup-open');
+      startCountdown();
+      setTimeout(() => { popup.style.display = 'none'; }, 360);
+    };
+
+    revealBtn.addEventListener('click', closePopup);
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+
+</body></html>
